@@ -3,7 +3,7 @@ using SimpleHashing.Net;
 using Assignment2.Data;
 using Assignment2.Models;
 
-namespace McbaExample.Controllers;
+namespace Assignment2.Controllers;
 
 // Bonus Material: Implement global authorisation check.
 //[AllowAnonymous]
