@@ -3,7 +3,7 @@ using Assignment2.Data;
 using Assignment2.Filter;
 using Assignment2.Models;
 using Assignment2.Utilities;
-namespace McbaExample.Controllers;
+namespace Assignment2.Controllers;
 
 // Can add authorize attribute to controllers.
 [AuthorizeCustomer]
