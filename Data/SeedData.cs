@@ -20,10 +20,9 @@ public static class SeedData
         var json = client.GetStringAsync("https://coreteaching01.csit.rmit.edu.au/~e103884/wdt/services/customers/").Result;
 
 
-        //Convert JSON to Customer Object using "Customer" in Models directory
         var Customers = JsonConvert.DeserializeObject<List<Customer>>(json, new JsonSerializerSettings
         {
-            DateFormatString = "dd/MM/yyyy HH:mm:ss"
+            DateFormatString = "dd/MM/yyyy hh:mm:ss tt"
         });
         // Set account balance to be 0
         decimal AccountBalance = 0;
