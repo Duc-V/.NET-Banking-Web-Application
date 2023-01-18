@@ -16,6 +16,7 @@ public class LoginController : Controller
 
     public LoginController(McbaContext context) => _context = context;
 
+    // GET request
     public IActionResult Login() => View();
 
     [HttpPost]
