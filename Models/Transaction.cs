@@ -8,8 +8,9 @@ public class Transaction
 {
     [Required]
     public int TransactionID { get; set; }
+
     [Required]
-    [Column(TypeName = "char(1)")]
+    [StringLength(1)]
     public string TransactionType { get; set; }
 
     [Required]

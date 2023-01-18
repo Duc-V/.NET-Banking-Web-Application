@@ -7,7 +7,7 @@ public class Login
     
 {   
 
-    [Column(TypeName = "char(8)")]
+    [StringLength(8)]
     public string LoginID { get; set; }
 
     [Required]
@@ -16,6 +16,6 @@ public class Login
 
 
     [Required]
-    [Column(TypeName = "char(94)")]
+    [StringLength(94)]
     public string PasswordHash { get; set; }
 }

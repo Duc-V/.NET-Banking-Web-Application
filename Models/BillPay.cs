@@ -31,7 +31,7 @@ namespace Assignment2.Models
 
         // Period
         [Required]
-        [Column(TypeName = "char(1)")]
+        [StringLength(1)]
         public string Period { get; set; }
 
     }

@@ -28,6 +28,7 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.Account", b =>
                 {
                     b.Property<int>("AccountNumber")
+                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.Property<string>("AccountType")
@@ -63,7 +64,8 @@ namespace Assignment2.Migrations
 
                     b.Property<string>("Period")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
@@ -107,14 +109,16 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.Login", b =>
                 {
                     b.Property<string>("LoginID")
-                        .HasColumnType("char(8)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("char(94)");
+                        .HasMaxLength(94)
+                        .HasColumnType("nvarchar(94)");
 
                     b.HasKey("LoginID");
 
@@ -131,26 +135,32 @@ namespace Assignment2.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
+                        .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Postcode")
                         .IsRequired()
+                        .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("State")
                         .IsRequired()
+                        .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
                     b.HasKey("PayeeID");
@@ -184,7 +194,8 @@ namespace Assignment2.Migrations
 
                     b.Property<string>("TransactionType")
                         .IsRequired()
-                        .HasColumnType("char(1)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("TransactionID");
 

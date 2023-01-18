@@ -8,6 +8,7 @@ public class Account
 {   
     // PK Key 
     [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+    [StringLength(4)]
     [Display(Name = "Account Number")]
     public int AccountNumber { get; set; }
 
