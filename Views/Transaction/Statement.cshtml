@@ -1,0 +1,32 @@
+﻿@model Account
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<div>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionID)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</td>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</td>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccount)</td>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</td>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].Comment)</td>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</td>
+        </tr
+        @{
+            var list = Model.Transactions.OrderByDescending(x => x.TransactionTimeUtc).ToList();
+        }
+        @foreach(var transaction in list) { 
+        <tr>
+            <td>@Html.DisplayFor(x => transaction.TransactionID)</td>
+            <td>@Html.DisplayFor(x => transaction.TransactionType)</td>
+            <td>@Html.DisplayFor(x => transaction.AccountNumber)</td>
+            <td>@Html.DisplayFor(x => transaction.DestinationAccount)</td>
+            <td>@Html.DisplayFor(x => transaction.Amount)</td>
+            <td>@Html.DisplayFor(x => transaction.Comment)</td>
+            <td>@Html.DisplayFor(x => transaction.TransactionTimeUtc)</td>
+        </tr>
+        }
+    </table>
+</div>
