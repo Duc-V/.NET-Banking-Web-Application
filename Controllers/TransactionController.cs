@@ -64,19 +64,16 @@ public class TransactionController : Controller
         return RedirectToAction("Index", "Customer");
     }
 
-    private void LogTransaction(Account account, decimal amount, string type)
-    {   
-
-        account.Balance += amount;
-
-        account.Transactions.Add(
-            new Transaction
-            {
-                TransactionType = type,
-                Amount = amount,
-                TransactionTimeUtc = DateTime.UtcNow
-            });
-        
+    private void LogTransaction(Account account, decimal amount, string transactionType)
+    {
+        var transaction = new Transaction
+        {
+            Account = account,
+            Amount = amount,
+            TransactionType = transactionType,
+            TransactionTimeUtc = DateTime.UtcNow
+        };
+        _context.Transactions.Add(transaction);
     }
 
 

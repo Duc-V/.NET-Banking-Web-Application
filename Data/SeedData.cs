@@ -23,7 +23,7 @@ public static class SeedData
         //Convert JSON to Customer Object using "Customer" in Models directory
         var Customers = JsonConvert.DeserializeObject<List<Customer>>(json, new JsonSerializerSettings
         {
-            DateFormatString = "dd/MM/yyyy"
+            DateFormatString = "dd/MM/yyyy HH:mm:ss"
         });
         // Set account balance to be 0
         decimal AccountBalance = 0;
