@@ -147,20 +147,20 @@ public class TransactionController : Controller
                 return View(sourceAccount);
             }
         }
-
-        // Log the transaction for the source account
-        LogTransaction(sourceAccount, -amount, "T", comment, destinationId);
-        if (chargeFee)
-        {
-            LogTransaction(sourceAccount, -serviceFee, "S", null);
-        }
-
         // Check if the source account has sufficient funds
         if (sourceAccount.Balance < 0)
         {
             ModelState.AddModelError(nameof(amount), "Insufficient funds");
             return View(sourceAccount);
         }
+        // Log the transaction for the source account
+        LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccount: destinationAccount);
+        if (chargeFee)
+        {
+            LogTransaction(sourceAccount, -serviceFee, "S", null);
+        }
+
+
 
         // Log the transaction for the destination account
         LogTransaction(destinationAccount, amount, "T",comment);
@@ -198,7 +198,7 @@ public class TransactionController : Controller
         return View(pagedList);
     }
 
-    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, int? destinationAccount = null)
+    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, Account _destinationAccount = null)
     {
         var transaction = new Transaction
         {
@@ -206,11 +206,12 @@ public class TransactionController : Controller
             TransactionType = transactionType,
             Amount = amount,
             Comment = comment,
-            TransactionTimeUtc = DateTime.UtcNow
+            TransactionTimeUtc = DateTime.UtcNow,
+
         };
-        if (destinationAccount != null)
+        if (_destinationAccount != null)
         {
-            transaction.DestinationAccountNumber = destinationAccount;
+            transaction.DestinationAccount = _destinationAccount;
         }
         account.Balance += amount;
         _context.Transactions.Add(transaction);
