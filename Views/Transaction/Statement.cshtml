@@ -29,7 +29,7 @@
         </tr>
         }
     </table>
-    @Html.PagedListPager(Model, page => Url.Action("Statement", new { page }),
+@Html.PagedListPager(Model, page => Url.Action("Statement", new { page, accountNumber = ViewData["AccountNumber"]}),
         new PagedListRenderOptions {
             LiElementClasses = new[] { "page-item" },
             PageClasses = new[] { "page-link" }
@@ -37,5 +37,5 @@
 </div>
 
 <div>
-    <a asp-controller="Customer" asp-action="Menu">Back to Customers</a>
+    <a asp-controller="Customer" asp-action="Menu" asp-route-id="@ViewData["AccountNumber"]">Back to Menu</a>
 </div>

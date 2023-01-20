@@ -73,7 +73,7 @@ public class TransactionController : Controller
     public async Task<IActionResult> Statement(int id, int? page = 1)
     {
         var Account = await _context.Accounts.FindAsync(id);
-
+        ViewData["AccountNumber"] = Account.AccountNumber;
         const int pageSize = 4;
         var pagedList = await _context.Transactions.Where(x => x.AccountNumber == Account.AccountNumber).OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
         return View(pagedList);
