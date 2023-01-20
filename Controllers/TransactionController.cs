@@ -21,7 +21,7 @@ public class TransactionController : Controller
     public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount, string comment)
+    public async Task<IActionResult> Deposit(int id, decimal amount, string comment = null)
     {
         var account = await _context.Accounts.FindAsync(id);
 
@@ -29,7 +29,7 @@ public class TransactionController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.HasMoreThanTwoDecimalPlaces())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (comment.Length > 30)
+        if (comment != null && comment.Length > 30)
             ModelState.AddModelError(nameof(comment), "Only 30 characters are allowed");
         if (!ModelState.IsValid)
         {
@@ -43,6 +43,7 @@ public class TransactionController : Controller
 
         return RedirectToAction("Index", "Customer");
     }
+
 
     public async Task<IActionResult> Widthdraw(int id) => View(await _context.Accounts.FindAsync(id));
 
