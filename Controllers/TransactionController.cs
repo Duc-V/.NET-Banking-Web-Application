@@ -44,12 +44,7 @@ public class TransactionController : Controller
         return RedirectToAction("Index", "Customer");
     }
 
-    public async Task<IActionResult> Widthdraw(int id)
-    {
-        var account = await _context.Accounts.FindAsync(id);
-        // round the balance to two decimal places
-        return View(account);
-    }
+    public async Task<IActionResult> Widthdraw(int id) => View(await _context.Accounts.FindAsync(id));
 
     [HttpPost]
     public async Task<IActionResult> Widthdraw(int id, decimal amount)
@@ -65,6 +60,7 @@ public class TransactionController : Controller
             ViewBag.Amount = amount;
             return View(account);
         }
+
 
         // check if service fee should be charged
         bool chargeFee = await chargefee(account.AccountNumber);
@@ -94,7 +90,6 @@ public class TransactionController : Controller
             ModelState.AddModelError(nameof(amount), "Insuffcient funds");
             return View(account);
         }
-        // round the balance to two decimal places
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index", "Customer");
