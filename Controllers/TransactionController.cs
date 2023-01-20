@@ -20,7 +20,7 @@ public class TransactionController : Controller
     public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount)
+    public async Task<IActionResult> Deposit(int id, decimal amount, string comment)
     {
         var account = await _context.Accounts.FindAsync(id);
 
@@ -28,13 +28,15 @@ public class TransactionController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.HasMoreThanTwoDecimalPlaces())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+        if (comment.Length > 30)
+            ModelState.AddModelError(nameof(comment), "Only 30 characters are allowed");
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = amount;
             return View(account);
         }
 
-        LogTransaction(account, amount, "D");
+        LogTransaction(account, amount, "D", comment);
 
         await _context.SaveChangesAsync();
 
@@ -48,6 +50,7 @@ public class TransactionController : Controller
     {
         var account = await _context.Accounts.FindAsync(id);
 
+
         if (amount <= 0)
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.HasMoreThanTwoDecimalPlaces())
@@ -58,7 +61,7 @@ public class TransactionController : Controller
             return View(account);
         }
 
-        LogTransaction(account, -amount, "W");
+        LogTransaction(account, -amount, "W", null);
         if (account.Balance < 0)
         {
             ModelState.AddModelError(nameof(amount), "Insuffcient funds");
@@ -80,7 +83,7 @@ public class TransactionController : Controller
         return View(pagedList);
     }
 
-    private void LogTransaction(Account account, decimal amount, string type)
+    private void LogTransaction(Account account, decimal amount, string type, string? comment)
     {   
 
         account.Balance += amount;
@@ -90,8 +93,9 @@ public class TransactionController : Controller
             {
                 TransactionType = type,
                 Amount = amount,
-                TransactionTimeUtc = DateTime.UtcNow
-            });
+                TransactionTimeUtc = DateTime.UtcNow,
+                Comment = comment
+            }) ;
         
     }
 
