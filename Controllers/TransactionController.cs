@@ -131,7 +131,7 @@ public class TransactionController : Controller
 
         // Check if a service fee should be charged
         bool chargeFee = await chargefee(sourceAccount.AccountNumber);
-        decimal serviceFee = 0.05m;
+        decimal serviceFee = 0.10m;
         decimal minimumAmount = 0;
         if (sourceAccount.AccountType == "Checkings")
         {
@@ -139,7 +139,7 @@ public class TransactionController : Controller
         }
         if (chargeFee)
         {
-            serviceFee = 0.05m;
+            serviceFee = 0.10m;
             minimumAmount += serviceFee;
             if (amount < minimumAmount)
             {
@@ -149,7 +149,7 @@ public class TransactionController : Controller
         }
 
         // Log the transaction for the source account
-        LogTransaction(sourceAccount, -amount, "T", comment, destinationAccount);
+        LogTransaction(sourceAccount, -amount, "T", comment, destinationId);
         if (chargeFee)
         {
             LogTransaction(sourceAccount, -serviceFee, "S", null);
@@ -198,7 +198,7 @@ public class TransactionController : Controller
         return View(pagedList);
     }
 
-    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, Account destinationAccount = null)
+    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, int? destinationAccount = null)
     {
         var transaction = new Transaction
         {
@@ -210,7 +210,7 @@ public class TransactionController : Controller
         };
         if (destinationAccount != null)
         {
-            transaction.DestinationAccountNumber = destinationAccount.AccountNumber;
+            transaction.DestinationAccountNumber = destinationAccount;
         }
         account.Balance += amount;
         _context.Transactions.Add(transaction);
