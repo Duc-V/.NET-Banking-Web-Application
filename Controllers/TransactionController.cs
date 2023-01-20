@@ -74,6 +74,7 @@ public class TransactionController : Controller
     {
         var Account = await _context.Accounts.FindAsync(id);
 
+        ViewBag.Account = Account;
         const int pageSize = 4;
         var pagedList = await _context.Transactions.Where(x => x.AccountNumber == Account.AccountNumber).OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
         return View(pagedList);

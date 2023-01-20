@@ -3,7 +3,10 @@
 @using X.PagedList.Web.Common
 
 @model IPagedList<Transaction>
-
+@{
+    ViewData["Title"] = "Account";
+    var account = (Account)ViewBag.Account;
+}
 
 <div>
     <table class="table">
@@ -37,5 +40,5 @@
 </div>
 
 <div>
-    <a asp-controller="Customer" asp-action="Menu">Back to Customers</a>
+    <a asp-controller="Customer" asp-action="Menu" asp-route-id ="@account.AccountNumber">Back to Menu</a>
 </div>
