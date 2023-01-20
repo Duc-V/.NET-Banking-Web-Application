@@ -154,7 +154,7 @@ public class TransactionController : Controller
             return View(sourceAccount);
         }
         // Log the transaction for the source account
-        LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccount: destinationAccount);
+        LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccountnumber: destinationAccount.AccountNumber);
         if (chargeFee)
         {
             LogTransaction(sourceAccount, -serviceFee, "S", null);
@@ -198,7 +198,7 @@ public class TransactionController : Controller
         return View(pagedList);
     }
 
-    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, Account _destinationAccount = null)
+    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, int _destinationAccountnumber = -1)
     {
         var transaction = new Transaction
         {
@@ -209,9 +209,9 @@ public class TransactionController : Controller
             TransactionTimeUtc = DateTime.UtcNow,
 
         };
-        if (_destinationAccount != null)
+        if (_destinationAccountnumber != -1)
         {
-            transaction.DestinationAccount = _destinationAccount;
+            transaction.DestinationAccount.AccountNumber = _destinationAccountnumber;
         }
         account.Balance += amount;
         _context.Transactions.Add(transaction);
