@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using X.PagedList;
 using Castle.Core.Resource;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment2.Controllers;
 public class TransactionController : Controller
@@ -43,13 +44,17 @@ public class TransactionController : Controller
         return RedirectToAction("Index", "Customer");
     }
 
-    public async Task<IActionResult> Widthdraw(int id) => View(await _context.Accounts.FindAsync(id));
+    public async Task<IActionResult> Widthdraw(int id)
+    {
+        var account = await _context.Accounts.FindAsync(id);
+        // round the balance to two decimal places
+        return View(account);
+    }
 
     [HttpPost]
     public async Task<IActionResult> Widthdraw(int id, decimal amount)
     {
         var account = await _context.Accounts.FindAsync(id);
-
 
         if (amount <= 0)
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
@@ -61,15 +66,54 @@ public class TransactionController : Controller
             return View(account);
         }
 
+        // check if service fee should be charged
+        bool chargeFee = await chargefee(account.AccountNumber);
+        decimal serviceFee = 0.05m;
+        decimal minimumAmount = 0;
+        if (account.AccountType == "Checkings")
+        {
+            minimumAmount = 300;
+        }
+        if (chargeFee)
+        {
+            serviceFee = 0.05m;
+            minimumAmount += serviceFee;
+            if (amount < minimumAmount)
+            {
+                ModelState.AddModelError(nameof(amount), "Minimum withdraw amount is " + minimumAmount.ToString());
+                return View(account);
+            }
+        }
         LogTransaction(account, -amount, "W", null);
+        if (chargeFee)
+        {
+            LogTransaction(account, -serviceFee, "S", null);
+        }
         if (account.Balance < 0)
         {
             ModelState.AddModelError(nameof(amount), "Insuffcient funds");
             return View(account);
         }
+        // round the balance to two decimal places
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index", "Customer");
+    }
+
+
+
+    public async Task<bool> chargefee(int accountNumber)
+    {
+        // Count the number of withdrawals for the specified account number
+        var withdrawalCount = await _context.Transactions
+            .CountAsync(x => x.AccountNumber == accountNumber && x.TransactionType == "W");
+
+        // Count the number of transfers for the specified account number with a non-null destination account number
+        var transferCount = await _context.Transactions
+            .CountAsync(x => x.AccountNumber == accountNumber && x.TransactionType == "T" && x.DestinationAccountNumber != null);
+
+        // Return true if there are any more than 2 withdrawals or transfers for the specified account number
+        return withdrawalCount + transferCount > 2;
     }
 
 
