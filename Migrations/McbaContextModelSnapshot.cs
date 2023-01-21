@@ -64,8 +64,7 @@ namespace Assignment2.Migrations
 
                     b.Property<string>("Period")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
@@ -226,7 +225,7 @@ namespace Assignment2.Migrations
                         .IsRequired();
 
                     b.HasOne("Assignment2.Models.Payee", null)
-                        .WithMany("BillPays")
+                        .WithMany("BillPay")
                         .HasForeignKey("PayeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -278,7 +277,7 @@ namespace Assignment2.Migrations
 
             modelBuilder.Entity("Assignment2.Models.Payee", b =>
                 {
-                    b.Navigation("BillPays");
+                    b.Navigation("BillPay");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,13 +10,12 @@ namespace Assignment2.Models
         public int BillPayID { get; set; }
 
         // AccountNumber FK
-        [Required]
+        //[Required]
         [ForeignKey("Account")]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
 
         // PayeeID
-        [Required]
         public int PayeeID{ get; set; }
 
         // Amount
@@ -31,7 +30,6 @@ namespace Assignment2.Models
 
         // Period
         [Required]
-        [StringLength(1)]
         public string Period { get; set; }
 
     }
