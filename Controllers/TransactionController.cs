@@ -119,11 +119,43 @@ public class TransactionController : Controller
             ViewBag.Amount = amount;
             return View(sourceAccount);
         }
+
+        // check if service fee should be charged
+        bool chargeFee = await chargefee(sourceAccount.AccountNumber);
+        decimal serviceFee = 0.10m;
+        decimal minimumAmount = 0;
+        if (sourceAccount.AccountType == "Checkings")
+        {
+            minimumAmount = 300;
+        }
+        if (chargeFee)
+        {
+            serviceFee = 0.10m;
+            minimumAmount += serviceFee;
+        }
+        if (amount < minimumAmount)
+        {
+            ModelState.AddModelError(nameof(amount), "Minimum transfer amount is " + minimumAmount.ToString());
+            return View(sourceAccount);
+        }
+
         if (destinationAccount != null)
         {
+            // Outgoing transfer
             LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccountnumber: destinationAccount.AccountNumber);
             sourceAccount.Balance -= amount;
+
+            // Service fee
+            if (chargeFee)
+            {
+                LogTransaction(sourceAccount, -serviceFee, "S", null, null);
+                sourceAccount.Balance -= serviceFee;
+            }
+
+            // Incoming transfer
+            LogTransaction(destinationAccount, amount, "T", comment);
             destinationAccount.Balance += amount;
+
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Customer");
         }
@@ -133,6 +165,7 @@ public class TransactionController : Controller
             return View(sourceAccount);
         }
     }
+
 
 
 
