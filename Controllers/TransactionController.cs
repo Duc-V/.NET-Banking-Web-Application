@@ -8,6 +8,7 @@ using X.PagedList;
 using Castle.Core.Resource;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace Assignment2.Controllers;
 public class TransactionController : Controller
@@ -194,6 +195,7 @@ public class TransactionController : Controller
         ViewBag.Account = Account;
         const int pageSize = 4;
         var pagedList = await _context.Transactions.Where(x => x.AccountNumber == Account.AccountNumber).OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
+        pagedList = MiscellaneousExtensionUtilities.ConverterUtcTimeToLocalTime(pagedList);
         return View(pagedList);
     }
 
