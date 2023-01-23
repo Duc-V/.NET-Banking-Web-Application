@@ -1,14 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Assignment2.Data;
 using Assignment2.Models;
+using SimpleHashing.Net;
 
 namespace Assignment2.Controllers
 {
     public class CustomerProfileController : Controller
     {
-        private readonly McbaContext _context;
 
-        public CustomerProfileController(McbaContext context) => _context = context;
+        private readonly McbaContext _context;
+        private readonly ISimpleHash _simpleHash;
+        public CustomerProfileController(McbaContext context, ISimpleHash simpleHash)
+        {
+            _context = context;
+            _simpleHash = simpleHash;
+        }
 
         // GET request to view customer profile
         public async Task<IActionResult> Index()
@@ -29,15 +35,13 @@ namespace Assignment2.Controllers
 
         // POST request to save changes to customer information
         [HttpPost]
-        public async Task<IActionResult> SaveChanges(Customer updatedCustomer)
+        public async Task<IActionResult> SaveChanges([FromForm] Customer updatedCustomer)
         {
             // Verify that the user is logged in
             if (!HttpContext.Session.TryGetValue(nameof(Customer.CustomerID), out var customerIDValue))
             {
                 return RedirectToAction("Login", "Login");
             }
-
-            // Get the current customer information
             var customerID = BitConverter.ToInt32(customerIDValue);
             var customer = await _context.Customers.FindAsync(customerID);
 
@@ -53,19 +57,19 @@ namespace Assignment2.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET request to view change password form
+
+
+
+
+
+
+
+        [HttpGet]
         public IActionResult ChangePassword()
         {
-            // Verify that the user is logged in
-            if (!HttpContext.Session.TryGetValue(nameof(Customer.CustomerID), out var customerIDValue))
-            {
-                return RedirectToAction("Login", "Login");
-            }
-
-            return View();
+            return View("ChangePassword");
         }
 
-        // POST request to change the customer's password
         [HttpPost]
         public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmNewPassword)
         {
@@ -74,41 +78,34 @@ namespace Assignment2.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-
-            // Get the current customer information
-            var customerID = BitConverter.ToInt32(customerIDValue);
-            var customer = await _context.Customers.FindAsync(customerID);
-
-            // Verify that the user is logged in
-            if (!HttpContext.Session.TryGetValue(nameof(Customer.CustomerID), out var customerIDValue))
-            {
-                return RedirectToAction("Login", "Login");
-            }
-
-            // Get the current customer information
             var customerID = BitConverter.ToInt32(customerIDValue);
             var customer = await _context.Customers.FindAsync(customerID);
 
             // Verify that the current password is correct
-            if (!s_simpleHash.Verify(currentPassword, customer.Login.PasswordHash))
+            if (!_simpleHash.Verify(currentPassword, customer.Login.PasswordHash))
             {
                 ModelState.AddModelError("CurrentPasswordIncorrect", "The current password is incorrect, please try again.");
-                return View();
-            }// Verify that the new password and confirmation match
+                return View("ChangePassword");
+            }
+
+            // Verify that the new password and confirmation match
             if (newPassword != confirmNewPassword)
             {
                 ModelState.AddModelError("NewPasswordMismatch", "The new password and confirmation do not match, please try again.");
-                return View();
+                return View("ChangePassword");
             }
 
             // Hash the new password
-            var newPasswordHash = s_simpleHash.Compute(newPassword);
+            var newPasswordHash = _simpleHash.Compute(newPassword);
             customer.Login.PasswordHash = newPasswordHash;
             _context.Customers.Update(customer);
             await _context.SaveChangesAsync();
 
             // Redirect the user back to the profile page
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Customer");
         }
+
+
+
     }
-    }
+}
