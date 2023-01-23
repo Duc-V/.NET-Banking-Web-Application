@@ -9,14 +9,13 @@ namespace Assignment2.Controllers
     public class BillPayController : Controller
     {
         private readonly McbaContext _context;
-        private Account account = new Account();
+        private int AccountNumber => HttpContext.Session.GetInt32("AccountNumber").Value;
 
         public BillPayController(McbaContext context) => _context = context;
 
 
         public IActionResult Index(int id)
         {
-            account = _context.Accounts.Find(id);
             ViewBag.Id = id;
             return View(_context.BillPay.Where(x => x.AccountNumber == id).ToList());
         }
@@ -26,12 +25,13 @@ namespace Assignment2.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewBillPay(int PayeeID, decimal Amount, DateTime DateTime, string Period)
         {
+            var account = _context.Accounts.Find(AccountNumber);
             Console.WriteLine(account.Balance);
-            if (account.AccountType == "Savings" && account.Balance <= 0)
-                ModelState.AddModelError("InvalidFunds", "Invalid fund");
+            if (account.AccountType == "Savings" && (account.Balance - Amount) <= 0)
+                ModelState.AddModelError("InvalidFunds", "Not Enough Funds");
 
             if (account.AccountType == "Checking" && (account.Balance - Amount) <= 300)
-                ModelState.AddModelError("InvalidFunds", "Invalid fund");
+                ModelState.AddModelError("InvalidFunds", "Funds cannot be under $300");
 
             if (!_context.Payee.Any(x => x.PayeeID == PayeeID))
                 ModelState.AddModelError(nameof(PayeeID), "PayeeID doesn't exist");
