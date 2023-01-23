@@ -1,0 +1,30 @@
+﻿@model List<BillPay>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>BillPayID</th>
+            <th>Account to widthdraw</th>
+            <th>PayeeID</th>
+            <th>Amount($)</th>
+            <th>Scheduled Time</th>
+        </tr
+        
+        @foreach(var item in Model)
+        {
+            // convert to local time
+            item.ScheduleTimeUtc = item.ScheduleTimeUtc.ToLocalTime();
+            <tr>
+                <td>@Html.DisplayFor(x => item.BillPayID)</td>
+                <td>@Html.DisplayFor(x => item.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => item.PayeeID)</td>
+                <td>@Html.DisplayFor(x => item.Amount)</td>
+                <td>@Html.DisplayFor(x => item.ScheduleTimeUtc)</td>
+            </tr>
+        }
+    </table>
+
+
+<div>
+    <a class="btn btn-primary" asp-action="AddNewBillPay" asp-route-id ="@ViewBag.Id">New Bill Pay</a>
+</div>

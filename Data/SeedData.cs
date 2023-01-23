@@ -64,7 +64,7 @@ public static class SeedData
             // Insert dummy Billpay and Payee IDs
             try
             {
-                using (StreamReader r = new StreamReader("BillPayData.json"))
+                using (StreamReader r = new StreamReader("BillPayDummyData.json"))
                 {
                     json = r.ReadToEnd();
                     var Payees = JsonConvert.DeserializeObject<List<Payee>>(json, new JsonSerializerSettings
@@ -77,10 +77,6 @@ public static class SeedData
                         context.Payee.Add(Payee);
                         foreach (var billPay in Payee.BillPay)
                         {
-                            if (billPay.Period == "O")
-                                billPay.Period = "One-Off";
-                            if (billPay.Period == "M")
-                                billPay.Period = "Monthly";
                             context.BillPay.Add(billPay);
                         }
                     }
