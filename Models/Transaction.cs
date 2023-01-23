@@ -26,7 +26,7 @@ public class Transaction
     [Column(TypeName = "money")]
     public decimal Amount { get; set; }
 
-
+        
     [StringLength(30)]
     public string Comment { get; set; }
 
