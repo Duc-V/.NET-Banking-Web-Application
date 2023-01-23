@@ -1,8 +1,10 @@
 ﻿using Assignment2.Data;
+using Assignment2.Filter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Assignment2.Controllers;
+[AuthorizeCustomer]
 public class BillPaymentService : BackgroundService
 {
     private readonly IServiceProvider _services;

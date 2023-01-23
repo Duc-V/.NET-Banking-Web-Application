@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Assignment2.Controllers;
+[AuthorizeCustomer]
 public class TransactionController : Controller
     {
     private readonly McbaContext _context;

@@ -28,3 +28,7 @@
 <div>
     <a class="btn btn-primary" asp-action="AddNewBillPay" asp-route-id ="@ViewBag.Id">New Bill Pay</a>
 </div>
+
+<div>
+    <a asp-controller="Customer" asp-action="Menu" asp-route-id="@Model[0].AccountNumber">Back to Menu</a>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Assignment2.Data;
+using Assignment2.Filter;
 using Assignment2.Models;
 using Assignment2.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System.Security.Principal;
 
 namespace Assignment2.Controllers
 {
+    [AuthorizeCustomer]
     public class BillPayController : Controller
     {
         private readonly McbaContext _context;
@@ -42,8 +44,8 @@ namespace Assignment2.Controllers
             
             if (!ModelState.IsValid)
                 return View();
-            
-            return View(account);
+
+            return RedirectToAction("Index", "BillPay", new { id = AccountNumber});
         }
     }
 }
