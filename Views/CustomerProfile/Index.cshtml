@@ -1,31 +1,34 @@
-﻿@model Assignment2.Models.Customer
-
+﻿@model Customer
+@{
+    ViewData["Title"] = "Customer Profile";
+}
 <h2>Customer Profile</h2>
 
-<form method="post">
+<form asp-action="SaveChanges">
     <div class="form-group">
         <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name"></span>
+        <input asp-for="Name" class="form-control" value="@Model.Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address"></span>
+        <input asp-for="Address" class="form-control" value="@Model.Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" />
-        <span asp-validation-for="City"></span>
+        <input asp-for="City" class="form-control" value="@Model.City" />
+        <span asp-validation-for="City" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="PostCode"></label>
-        <input asp-for="PostCode" class="form-control" />
-        <span asp-validation-for="PostCode"></span>
+        <input asp-for="PostCode" class="form-control" value="@Model.PostCode" />
+        <span asp-validation-for="PostCode" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="submit" value="Save Changes" class="btn btn-primary" />
     </div>
 </form>
 
-<a asp-controller="CustomerProfile" asp-action="ChangePassword">Change Password</a>
+
+
