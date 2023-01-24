@@ -44,7 +44,19 @@ public class CustomerProfileController : Controller
 
 
 
+    public async Task<IActionResult> Edit()
+    {
+        // Lazy loading.
+        // The Customer.Accounts property will be lazy loaded upon demand.
+        var customer = await _context.Customers.FindAsync(CustomerID);
+        _customer = customer;
+        // OR
+        // Eager loading.
+        //var customer = await _context.Customers.Include(x => x.Accounts).
+        //    FirstOrDefaultAsync(x => x.CustomerID == _customerID);
 
+        return View(customer);
+    }
 
     [HttpPost]
     public async Task<IActionResult> SaveChanges([Required, StringLength(50)] string name, [StringLength(50)] string address, [StringLength(40)] string city, [StringLength(4)] string postcode)

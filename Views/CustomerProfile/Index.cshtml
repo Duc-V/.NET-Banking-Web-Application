@@ -4,31 +4,21 @@
 }
 <h2>Customer Profile</h2>
 
-<form asp-action="SaveChanges">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" value="@Model.Name" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" value="@Model.Address" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="City"></label>
-        <input asp-for="City" class="form-control" value="@Model.City" />
-        <span asp-validation-for="City" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="PostCode"></label>
-        <input asp-for="PostCode" class="form-control" value="@Model.PostCode" />
-        <span asp-validation-for="PostCode" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Save Changes" class="btn btn-primary" />
-    </div>
-</form>
+<div class="form-group">
+    <label>Name:</label>
+    <p>@Model.Name</p>
+</div>
+<div class="form-group">
+    <label>Address:</label>
+    <p>@Model.Address</p>
+</div>
+<div class="form-group">
+    <label>City:</label>
+    <p>@Model.City</p>
+</div>
+<div class="form-group">
+    <label>PostCode:</label>
+    <p>@Model.PostCode</p>
+</div>
 
-
-
+<a asp-action="Edit" class="btn btn-primary">Update Profile</a>
