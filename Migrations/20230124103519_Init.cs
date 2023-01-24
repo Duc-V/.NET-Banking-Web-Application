@@ -86,12 +86,14 @@ namespace Assignment2.Migrations
                 name: "BillPay",
                 columns: table => new
                 {
-                    BillPayID = table.Column<int>(type: "int", nullable: false),
+                    BillPayID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AccountNumber = table.Column<int>(type: "int", nullable: false),
                     PayeeID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     ScheduleTimeUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Period = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Period = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

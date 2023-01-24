@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(McbaContext))]
-    [Migration("20230121061452_Init")]
+    [Migration("20230124103519_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -54,7 +54,10 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.BillPay", b =>
                 {
                     b.Property<int>("BillPayID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillPayID"));
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
@@ -71,6 +74,9 @@ namespace Assignment2.Migrations
 
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BillPayID");
 

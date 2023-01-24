@@ -45,6 +45,17 @@ namespace Assignment2.Controllers
             if (!ModelState.IsValid)
                 return View();
 
+            // new bill pay account object
+            var BillPay = new BillPay
+            {
+                AccountNumber = account.AccountNumber,
+                PayeeID = PayeeID,
+                Amount = Amount,
+                ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime, TimeZoneInfo.Local),
+                Period = Period
+            };
+            _context.BillPay.Add(BillPay);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index", "BillPay", new { id = AccountNumber});
         }
     }
