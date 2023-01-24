@@ -29,7 +29,9 @@
                                     Welcome, @Context.Session.GetString(nameof(Customer.Name))
                                 </span>
                             </li>
-                            <li class="nav-item"><a asp-controller="CustomerProfile" asp-action="Index">Profile</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="CustomerProfile" asp-action="CustomerProfile">Profile</a>
+                                </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
                             </li>
