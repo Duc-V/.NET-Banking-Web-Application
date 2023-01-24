@@ -58,13 +58,13 @@ public class BillPaymentService : BackgroundService
                 // check if the account have sufficient fund
                 if (account.AccountType == "Savings" && (account.Balance - BillPay.Amount) <= 0)
                 {
-                    BillPay.Status = "Invalid";
+                    BillPay.Status = "Not Enough Funds At Scheduled Time";
                     context.SaveChanges();
                     continue;
                 }
                 else if (account.AccountType == "Checking" && (account.Balance - BillPay.Amount) <= 300)
                 {
-                    BillPay.Status = "Invalid";
+                    BillPay.Status = "Not Enough Funds At Scheduled Time";
                     context.SaveChanges();
                     continue;
                 }
@@ -81,6 +81,8 @@ public class BillPaymentService : BackgroundService
                     Comment = $"BillPay to PayeeID {BillPay.PayeeID}",
                     TransactionTimeUtc = BillPay.ScheduleTimeUtc.ToLocalTime(),
                 };
+                // change the bill pay status to DONE
+                BillPay.Status = "Done";
 
                 _logger.LogInformation("################## Transaction logged");
                 _logger.LogInformation(BillPay.BillPayID.ToString());

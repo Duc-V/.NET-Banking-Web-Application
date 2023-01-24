@@ -41,20 +41,22 @@ namespace Assignment2.Controllers
                 ModelState.AddModelError(nameof(Amount), "Amount cannot have more than 2 decimal places.");
             if (DateTime.Now > DateTime) 
                 ModelState.AddModelError(nameof(DateTime), "Cannot schedule for time in the past");
-            
+
             if (!ModelState.IsValid)
                 return View();
-
-            // new bill pay account object
-            var BillPay = new BillPay
+            else
             {
-                AccountNumber = account.AccountNumber,
-                PayeeID = PayeeID,
-                Amount = Amount,
-                ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime, TimeZoneInfo.Local),
-                Period = Period
-            };
-            _context.BillPay.Add(BillPay);
+                // new bill pay account object
+                var BillPay = new BillPay
+                {
+                    AccountNumber = account.AccountNumber,
+                    PayeeID = PayeeID,
+                    Amount = Amount,
+                    ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime, TimeZoneInfo.Local),
+                    Period = Period
+                };
+                _context.BillPay.Add(BillPay);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "BillPay", new { id = AccountNumber});
         }
