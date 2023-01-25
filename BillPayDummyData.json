@@ -9,11 +9,10 @@
     "Phone": "0474819995",
     "BillPay": [
       {
-        "BillPayID": 1000,
         "AccountNumber": 4100,
         "Amount": 100.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "O"
+        "Period": "One-Off"
       }
     ]
   },
@@ -27,11 +26,10 @@
     "Phone": "0474880995",
     "BillPay": [
       {
-        "BillPayID": 1002,
         "AccountNumber": 4100,
         "Amount": 70.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "M"
+        "Period": "One-Off"
       }
     ]
   },
@@ -45,11 +43,10 @@
     "Phone": "0474889999",
     "BillPay": [
       {
-        "BillPayID": 1006,
         "AccountNumber": 4101,
         "Amount": 111.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "M"
+        "Period": "Monthly"
       }
     ]
   }

@@ -1,4 +1,5 @@
 ﻿using Assignment2.Data;
+using Assignment2.Filter;
 using Assignment2.Models;
 using Assignment2.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using System.Security.Principal;
 
 namespace Assignment2.Controllers
 {
+    [AuthorizeCustomer]
     public class BillPayController : Controller
     {
         private readonly McbaContext _context;
@@ -17,7 +19,7 @@ namespace Assignment2.Controllers
         public IActionResult Index(int id)
         {
             ViewBag.Id = id;
-            return View(_context.BillPay.Where(x => x.AccountNumber == id).ToList());
+            return View(_context.BillPay.Where(x => x.AccountNumber == id).OrderByDescending(x => x.ScheduleTimeUtc).ToList());
         }
 
         public IActionResult AddNewBillPay() => View();
@@ -39,11 +41,24 @@ namespace Assignment2.Controllers
                 ModelState.AddModelError(nameof(Amount), "Amount cannot have more than 2 decimal places.");
             if (DateTime.Now > DateTime) 
                 ModelState.AddModelError(nameof(DateTime), "Cannot schedule for time in the past");
-            
+
             if (!ModelState.IsValid)
                 return View();
-            
-            return View(account);
+            else
+            {
+                // new bill pay account object
+                var BillPay = new BillPay
+                {
+                    AccountNumber = account.AccountNumber,
+                    PayeeID = PayeeID,
+                    Amount = Amount,
+                    ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime, TimeZoneInfo.Local),
+                    Period = Period
+                };
+                _context.BillPay.Add(BillPay);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "BillPay", new { id = AccountNumber});
         }
     }
 }

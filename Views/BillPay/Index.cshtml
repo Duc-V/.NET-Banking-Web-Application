@@ -8,8 +8,8 @@
             <th>PayeeID</th>
             <th>Amount($)</th>
             <th>Scheduled Time</th>
+            <th>Status</th>
         </tr
-        
         @foreach(var item in Model)
         {
             // convert to local time
@@ -20,6 +20,7 @@
                 <td>@Html.DisplayFor(x => item.PayeeID)</td>
                 <td>@Html.DisplayFor(x => item.Amount)</td>
                 <td>@Html.DisplayFor(x => item.ScheduleTimeUtc)</td>
+                <td>@Html.DisplayFor(x => item.Status)</td>
             </tr>
         }
     </table>
@@ -27,4 +28,8 @@
 
 <div>
     <a class="btn btn-primary" asp-action="AddNewBillPay" asp-route-id ="@ViewBag.Id">New Bill Pay</a>
+</div>
+
+<div>
+    <a asp-controller="Customer" asp-action="Menu" asp-route-id="@ViewBag.Id">Back to Menu</a>
 </div>

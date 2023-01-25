@@ -17,9 +17,11 @@ namespace Assignment2.Migrations
                 {
                     CustomerID = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    TFN = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true)
+                    PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,12 +88,14 @@ namespace Assignment2.Migrations
                 name: "BillPay",
                 columns: table => new
                 {
-                    BillPayID = table.Column<int>(type: "int", nullable: false),
+                    BillPayID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AccountNumber = table.Column<int>(type: "int", nullable: false),
                     PayeeID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     ScheduleTimeUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Period = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Period = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

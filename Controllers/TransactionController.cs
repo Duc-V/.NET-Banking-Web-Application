@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace Assignment2.Controllers;
+[AuthorizeCustomer]
 public class TransactionController : Controller
     {
     private readonly McbaContext _context;
@@ -112,25 +113,15 @@ public class TransactionController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.HasMoreThanTwoDecimalPlaces())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-
-        // Check if the destination account exists
-        if (destinationAccount == null)
-            ModelState.AddModelError(nameof(destinationId), "Destination account does not exist.");
-
-        // Check if the destination account is the same as the source account
-        if (destinationAccount.AccountNumber == sourceAccount.AccountNumber)
-            ModelState.AddModelError(nameof(destinationId), "Destination account cannot be the same as the source account.");
-        // Check comment character length 
         if (comment != null && comment.Length > 30)
             ModelState.AddModelError(nameof(comment), "Only 30 characters are allowed");
-
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = amount;
             return View(sourceAccount);
         }
 
-        // Check if a service fee should be charged
+        // check if service fee should be charged
         bool chargeFee = await chargefee(sourceAccount.AccountNumber);
         decimal serviceFee = 0.10m;
         decimal minimumAmount = 0;
@@ -142,36 +133,41 @@ public class TransactionController : Controller
         {
             serviceFee = 0.10m;
             minimumAmount += serviceFee;
-            if (amount < minimumAmount)
-            {
-                ModelState.AddModelError(nameof(amount), "Minimum transfer amount is " + minimumAmount.ToString());
-                return View(sourceAccount);
-            }
         }
-        // Check if the source account has sufficient funds
-        if (sourceAccount.Balance < 0)
+        if (amount < minimumAmount)
         {
-            ModelState.AddModelError(nameof(amount), "Insufficient funds");
+            ModelState.AddModelError(nameof(amount), "Minimum transfer amount is " + minimumAmount.ToString());
             return View(sourceAccount);
         }
-        // Log the transaction for the source account
-        LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccountnumber: destinationAccount.AccountNumber);
-        if (chargeFee)
+
+        if (destinationAccount != null)
         {
-            LogTransaction(sourceAccount, -serviceFee, "S", null);
+            // Outgoing transfer
+            LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccountnumber: destinationAccount.AccountNumber);
+            sourceAccount.Balance -= amount;
+
+            // Service fee
+            if (chargeFee)
+            {
+                LogTransaction(sourceAccount, -serviceFee, "S", null, null);
+                sourceAccount.Balance -= serviceFee;
+            }
+
+            // Incoming transfer
+            LogTransaction(destinationAccount, amount, "T", comment);
+            destinationAccount.Balance += amount;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Customer");
         }
-
-
-
-        // Log the transaction for the destination account
-        LogTransaction(destinationAccount, amount, "T",comment);
-
-        // Save the changes to the database
-        await _context.SaveChangesAsync();
-
-        // Redirect the user to a confirmation page or the customer's account details page
-        return RedirectToAction("Index", "Customer");
+        else
+        {
+            ModelState.AddModelError(nameof(destinationId), "Invalid account number");
+            return View(sourceAccount);
+        }
     }
+
+
 
 
     public async Task<bool> chargefee(int accountNumber)
@@ -199,28 +195,23 @@ public class TransactionController : Controller
         return View(pagedList);
     }
 
-    private void LogTransaction(Account account, decimal amount, string transactionType, string comment, int _destinationAccountnumber = -1)
+    private void LogTransaction(Account account, decimal amount, string transactionType, string comment = null, int? _destinationAccountnumber = null)
     {
         var transaction = new Transaction
         {
-            AccountNumber = account.AccountNumber,
-            TransactionType = transactionType,
+            Account = account,
             Amount = amount,
-            Comment = comment,
             TransactionTimeUtc = DateTime.UtcNow,
-
+            TransactionType = transactionType,
+            Comment = comment
         };
-        if (_destinationAccountnumber != -1)
+        if (_destinationAccountnumber != null)
         {
-            transaction.DestinationAccount.AccountNumber = _destinationAccountnumber;
+            transaction.DestinationAccount = _context.Accounts.Find(_destinationAccountnumber);
+            transaction.DestinationAccount.AccountNumber = (int)_destinationAccountnumber;
         }
-        account.Balance += amount;
         _context.Transactions.Add(transaction);
+        account.Balance += amount;
     }
-
-
-
-
-
 
 }
