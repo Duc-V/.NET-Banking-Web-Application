@@ -1,4 +1,4 @@
-namespace Assignment2.Models
+namespace AdminAPI.Models
 {
     public class ErrorViewModel
     {

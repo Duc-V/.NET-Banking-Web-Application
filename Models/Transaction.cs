@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Assignment2.Models;
+namespace AdminAPI.Models;
 
 
 public class Transaction

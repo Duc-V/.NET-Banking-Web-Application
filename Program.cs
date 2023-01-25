@@ -1,58 +1,47 @@
-using Assignment2.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using AdminAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using Assignment2.Controllers;
 using SimpleHashing.Net;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddDbContext<McbaContext>(options =>
+namespace AdminAPI
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(McbaContext)));
-
-     //Enable lazy loading.
-    options.UseLazyLoadingProxies();
-});
-
-// Store session into Web-Server memory.
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    // Make the session cookie essential.
-    options.Cookie.IsEssential = true;
-});
-// Add people background service to automatically run in the background along-side the web-server.
-builder.Services.AddHostedService<BillPaymentService>();
-
-builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ISimpleHash, SimpleHash>();
-
-var app = builder.Build();
-
-//Seed data.
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
+    public class Program
     {
-        SeedData.Initialize(services);
-}
-    catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred seeding the DB.");
-}
-}
+        public static void Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-    app.UseExceptionHandler("/Home/Error");
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<McbaContext>();
+                    context.Database.Migrate();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while migrating the database.");
+                }
+            }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
-app.UseSession();
-app.MapDefaultControllerRoute();
+            host.Run();
+        }
 
-app.Run();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}

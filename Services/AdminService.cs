@@ -1,7 +1,7 @@
-﻿using Assignment2.Models;
+﻿using AdminAPI.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
-namespace Assignment2.Utilities;
+namespace AdminAPI.Utilities;
 public static class MiscellaneousExtensionUtilities
 {
     public static bool HasMoreThanNDecimalPlaces(this decimal value, int n) => decimal.Round(value, n) != value;

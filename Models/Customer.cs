@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Assignment2.Models;
+namespace AdminAPI.Models;
 
 public class Customer
 {
@@ -19,6 +19,12 @@ public class Customer
 
     [StringLength(4)]
     public string PostCode { get; set; }
+
+    [StringLength(12)]
+    public string Mobile { get; set; }
+
+    [StringLength(11)]
+    public string TFN { get; set; }
 
     public virtual List<Account> Accounts { get; set; }
     public virtual Login Login { get; set; }
