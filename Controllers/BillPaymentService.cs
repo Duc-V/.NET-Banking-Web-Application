@@ -40,18 +40,17 @@ public class BillPaymentService : BackgroundService
         var context = scope.ServiceProvider.GetRequiredService<McbaContext>();
 
         var BillPaymetList = await context.BillPay.ToListAsync(cancellationToken);
-        var BillPaymentList = BillPaymetList.Where(x => (x.Status != "Completed") && (x.Status != "Invalid")).OrderByDescending(x => x.ScheduleTimeUtc);
+        var list = BillPaymetList.Where(x => (x.Status != "Complete") && (x.Status != "Not Enough Funds At Scheduled Time")).OrderByDescending(x => x.ScheduleTimeUtc);
 
-        foreach(var BillPay in BillPaymetList)
+        foreach(var BillPay in list)
         {
 
             int TimeDifference = (DateTime.UtcNow - BillPay.ScheduleTimeUtc).Minutes;
 
-            // if the time difference between time now and Schedule time is within +-3 minutes, execute
-            if ((Enumerable.Range(-3, 3).Contains(TimeDifference)))
+            // if the time difference between time now and Schedule time is within +-3 minutes OR transactions not executed in the past, execute
+            if ((Enumerable.Range(-3, 3).Contains(TimeDifference)) || (BillPay.ScheduleTimeUtc < DateTime.UtcNow))
 
             {
-                _logger.LogInformation(BillPay.BillPayID.ToString());
 
                 // widthdraw the money from the instructed account number
                 var account = context.Accounts.Find(BillPay.AccountNumber);
@@ -68,9 +67,9 @@ public class BillPaymentService : BackgroundService
                     context.SaveChanges();
                     continue;
                 }
-                // if not any of the above case
-                account.Balance-= BillPay.Amount;
-                
+                // if not any of the above cases
+                account.Balance -= BillPay.Amount;
+
 
                 // log the transaction
                 var transaction = new Transaction
@@ -81,16 +80,35 @@ public class BillPaymentService : BackgroundService
                     Comment = $"BillPay to PayeeID {BillPay.PayeeID}",
                     TransactionTimeUtc = BillPay.ScheduleTimeUtc.ToLocalTime(),
                 };
-                // change the bill pay status to DONE
-                BillPay.Status = "Done";
-
-                _logger.LogInformation("################## Transaction logged");
-                _logger.LogInformation(BillPay.BillPayID.ToString());
                 context.Transactions.Add(transaction);
+
+
+                // change the bill pay status to Complete
+                BillPay.Status = "Complete";
+
+                // if Period == One-Off, schedule the next billpay
+                if (BillPay.Period == "Monthly")
+                {
+                    var NextMonthBpay = new BillPay
+                    {
+                        AccountNumber = BillPay.AccountNumber,
+                        PayeeID = BillPay.PayeeID,
+                        Amount = BillPay.Amount,
+                        ScheduleTimeUtc = BillPay.ScheduleTimeUtc.AddMonths(1),
+                        Period = BillPay.Period
+                    };
+
+                    context.BillPay.Add(NextMonthBpay);
+                }
+                _logger.LogInformation($"################## Transaction No.{BillPay.BillPayID} logged #################");
+
+
+
                 context.SaveChanges();
             }
         }
 
         _logger.LogInformation("BillPayment work complete.");
     }
+
 }
