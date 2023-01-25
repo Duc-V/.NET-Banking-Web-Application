@@ -10,7 +10,7 @@ builder.Services.AddDbContext<McbaContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(McbaContext)));
 
-     //Enable lazy loading.
+    //Enable lazy loading.
     options.UseLazyLoadingProxies();
 });
 
@@ -36,12 +36,12 @@ using (var scope = app.Services.CreateScope())
     try
     {
         SeedData.Initialize(services);
-}
+    }
     catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred seeding the DB.");
-}
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
+    }
 }
 
 // Configure the HTTP request pipeline.

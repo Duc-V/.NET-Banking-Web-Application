@@ -94,6 +94,9 @@ public class CustomerProfileController : Controller
         _customer.City = model.Customer.City;
         _customer.PostCode = model.Customer.PostCode;
         _context.Customers.Update(_customer);
+        
+        HttpContext.Session.SetString(nameof(Customer.Name), model.Customer.Name);
+        
         await _context.SaveChangesAsync();
         
         viewModel = new ViewModel

@@ -18,20 +18,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav d-flex align-items-center">
                         @{
                             var isLoggedIn = Context.Session.GetInt32(nameof(Customer.CustomerID)).HasValue;
                         }
                         @if (isLoggedIn)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">
-                                    Welcome, @Context.Session.GetString(nameof(Customer.Name))
+                                <span class="nav-link text-primary fw-bold">
+                                    <a asp-controller="CustomerProfile" asp-action="Index" class="d-flex align-items-center btn-link">
+                                        <img src="https://api.dicebear.com/5.x/bottts-neutral/svg?seed=@Context.Session.GetInt32(nameof(Customer.CustomerID))"
+                                            class="img-fluid rounded" style="margin-right: 10px; width: 30px; height: 30px; object-fit: cover;">
+                                        @Context.Session.GetString(nameof(Customer.Name))
+                                    </a>
                                 </span>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="CustomerProfile" asp-action="Index">Profile</a>
-                                </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
                             </li>

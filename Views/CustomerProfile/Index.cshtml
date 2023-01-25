@@ -2,12 +2,23 @@
 
 @{
     ViewData["Title"] = "Customer Profile";
+    var img = String.Empty;
+    if(Model.Customer.ProfilePicture is null)
+    {
+        img = "https://api.dicebear.com/5.x/bottts-neutral/svg?seed=" + Model.Customer.CustomerID;
+    } else
+    {
+        img = Convert.ToBase64String(Model.Customer.ProfilePicture);
+    }
 }
 
 <h2>Customer Profile</h2>
 @await Html.PartialAsync("_RenderAlerts", Model)
 
-<div class="form-group">
+<img src="@img"
+     class="img-fluid rounded mt-4" style="width: 80px; height: 80px; object-fit: cover;">
+
+<div class="form-group mt-4">
     <label>Name:</label>
     <p>@Model.Customer.Name</p>
 </div>
