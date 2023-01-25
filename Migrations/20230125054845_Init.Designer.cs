@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(McbaContext))]
-    [Migration("20230125051226_Init")]
+    [Migration("20230125054845_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -54,7 +54,10 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.BillPay", b =>
                 {
                     b.Property<int>("BillPayID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillPayID"));
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
@@ -67,11 +70,13 @@ namespace Assignment2.Migrations
 
                     b.Property<string>("Period")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ScheduleTimeUtc")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BillPayID");
 
@@ -237,7 +242,7 @@ namespace Assignment2.Migrations
                         .IsRequired();
 
                     b.HasOne("Assignment2.Models.Payee", null)
-                        .WithMany("BillPays")
+                        .WithMany("BillPay")
                         .HasForeignKey("PayeeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -289,7 +294,7 @@ namespace Assignment2.Migrations
 
             modelBuilder.Entity("Assignment2.Models.Payee", b =>
                 {
-                    b.Navigation("BillPays");
+                    b.Navigation("BillPay");
                 });
 #pragma warning restore 612, 618
         }

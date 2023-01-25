@@ -76,7 +76,7 @@ public class BillPaymentService : BackgroundService
                 {
                     AccountNumber = BillPay.AccountNumber,
                     TransactionType = "B",
-                    Amount = BillPay.Amount,
+                    Amount = - BillPay.Amount,
                     Comment = $"BillPay to PayeeID {BillPay.PayeeID}",
                     TransactionTimeUtc = BillPay.ScheduleTimeUtc,
                 };

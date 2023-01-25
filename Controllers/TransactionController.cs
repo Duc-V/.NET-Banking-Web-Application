@@ -201,7 +201,7 @@ public class TransactionController : Controller
         {
             Account = account,
             Amount = amount,
-            TransactionTimeUtc = DateTime.Now,
+            TransactionTimeUtc = DateTime.UtcNow,
             TransactionType = transactionType,
             Comment = comment
         };

@@ -12,7 +12,7 @@
         "AccountNumber": 4100,
         "Amount": 100.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "O"
+        "Period": "One-Off"
       }
     ]
   },
@@ -29,7 +29,7 @@
         "AccountNumber": 4100,
         "Amount": 70.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "M"
+        "Period": "One-Off"
       }
     ]
   },
@@ -46,7 +46,7 @@
         "AccountNumber": 4101,
         "Amount": 111.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "M"
+        "Period": "Monthly"
       }
     ]
   }
