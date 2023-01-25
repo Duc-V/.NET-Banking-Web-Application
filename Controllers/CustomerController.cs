@@ -32,7 +32,9 @@ public class CustomerController : Controller
         return View(customer);
     }
 
-    public async Task<IActionResult> Menu(int id) => View(await _context.Accounts.FindAsync(id));
-
+    public async Task<IActionResult> Menu(int id) {
+        HttpContext.Session.SetInt32("AccountNumber", id);
+        return View(await _context.Accounts.FindAsync(id));
+    }
 
 }

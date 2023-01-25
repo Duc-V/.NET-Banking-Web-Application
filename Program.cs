@@ -1,5 +1,6 @@
 using Assignment2.Data;
 using Microsoft.EntityFrameworkCore;
+using Assignment2.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddSession(options =>
     // Make the session cookie essential.
     options.Cookie.IsEssential = true;
 });
+// Add people background service to automatically run in the background along-side the web-server.
+builder.Services.AddHostedService<BillPaymentService>();
 
 builder.Services.AddControllersWithViews();
 

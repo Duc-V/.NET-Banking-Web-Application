@@ -32,7 +32,7 @@ namespace Assignment2.Models
         [StringLength(50)]
         public string Phone { get; set; }
 
-        public virtual List<BillPay> BillPays { get; set; }
+        public virtual List<BillPay> BillPay { get; set; }
 
     }
 }

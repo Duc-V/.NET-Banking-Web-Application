@@ -15,13 +15,11 @@
                    asp-controller="Transaction" asp-action="Transfer" asp-route-id="@Model.AccountNumber">Transfer</a>
                 <a class="btn btn-primary"
                    asp-controller="Transaction" asp-action="Statement" asp-route-id="@Model.AccountNumber">Statement</a>
+                <a class="btn btn-primary"
+                   asp-controller="BillPay" asp-action="Index" asp-route-id="@Model.AccountNumber">BillPay </a>
             </td>
         </tr>
     </table>
-
-
-
-
 </div>
 
 

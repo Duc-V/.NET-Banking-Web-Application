@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="BillPay" asp-action="AddNewBillPay">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="PayeeID" class="control-label">PayeeID</label>
+                <input id="PayeeID" name="PayeeID" class="form-control"
+                       data-val="true" data-val-number="The field Amount must be a number."
+                       data-val-required="The Amount field is required." />
+                @Html.ValidationMessage("PayeeID", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="Amount" class="control-label">Amount</label>
+                <input id="Amount" name="Amount" class="form-control"
+                       data-val="true" data-val-number="The field Amount must be a number."
+                       data-val-required="The Amount field is required." />
+                @Html.ValidationMessage("Amount", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidFunds", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="DateTime" class="control-label">Schedule Time</label>
+                <input type="datetime-local" id="DateTime" name="DateTime" class="form-control" data-val-required="The Schedule Time field is required."
+                       required/>
+                @Html.ValidationMessage("DateTime", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Period" class="control-label">Repeat</label>
+                <select name="Period" id="Period" class="form-control">
+                    <option value="One-Off">One-Off</option>
+                    <option value="Monthly">Monthly</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ADD" class="btn btn-primary" />
+                
+            </div>
+        </form>
+    </div>
+</div>
+</div>
