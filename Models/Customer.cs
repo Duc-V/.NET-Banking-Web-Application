@@ -11,6 +11,9 @@ public class Customer
     [Required, StringLength(50)]
     public string Name { get; set; }
 
+    [Required, StringLength(11)]
+    public string TFN { get; set; }
+
     [StringLength(50)]
     public string Address { get; set; }
 
@@ -20,6 +23,8 @@ public class Customer
     [StringLength(4)]
     public string PostCode { get; set; }
 
+    [Required, StringLength(12)]
+    public string Mobile { get; set; }
     public virtual List<Account> Accounts { get; set; }
     public virtual Login Login { get; set; }
 }
