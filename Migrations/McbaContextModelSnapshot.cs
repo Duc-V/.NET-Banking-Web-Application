@@ -93,7 +93,6 @@ namespace Assignment2.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
@@ -107,7 +106,6 @@ namespace Assignment2.Migrations
                         .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("TFN")
-                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 

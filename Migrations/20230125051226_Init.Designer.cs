@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(McbaContext))]
-    [Migration("20230125050313_Init")]
+    [Migration("20230125051226_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -96,7 +96,6 @@ namespace Assignment2.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
@@ -110,7 +109,6 @@ namespace Assignment2.Migrations
                         .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("TFN")
-                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
