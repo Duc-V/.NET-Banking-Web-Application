@@ -25,6 +25,8 @@ public class Customer
 
     [StringLength(12)]
     public string Mobile { get; set; }
+    
+    public byte[] ProfilePicture { get; set; }
     public virtual List<Account> Accounts { get; set; }
     public virtual Login Login { get; set; }
 }

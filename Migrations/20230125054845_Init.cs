@@ -21,7 +21,8 @@ namespace Assignment2.Migrations
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true)
+                    Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
+                    ProfilePicture = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
