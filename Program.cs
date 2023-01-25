@@ -1,6 +1,7 @@
 using Assignment2.Data;
 using Microsoft.EntityFrameworkCore;
 using Assignment2.Controllers;
+using SimpleHashing.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddHostedService<BillPaymentService>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ISimpleHash, SimpleHash>();
 
 var app = builder.Build();
 

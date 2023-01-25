@@ -10,11 +10,13 @@ namespace Assignment2.Controllers;
 //[Route("/Mcba/SecureLogin")]
 public class LoginController : Controller
 {
-    private static readonly ISimpleHash s_simpleHash = new SimpleHash();
-
     private readonly McbaContext _context;
-
-    public LoginController(McbaContext context) => _context = context;
+    private readonly ISimpleHash _simpleHash;
+    public LoginController(McbaContext context, ISimpleHash simpleHash)
+    {
+        _context = context;
+        _simpleHash = simpleHash;
+    }
 
     // GET request
     public IActionResult Login() => View();
@@ -23,7 +25,7 @@ public class LoginController : Controller
     public async Task<IActionResult> Login(string loginID, string password)
     {
         var login = await _context.Logins.FindAsync(loginID);
-        if (login == null || string.IsNullOrEmpty(password) || !s_simpleHash.Verify(password, login.PasswordHash))
+        if (login == null || string.IsNullOrEmpty(password) || !_simpleHash.Verify(password, login.PasswordHash))
         {
             ModelState.AddModelError("LoginFailed", "Login failed, please try again. (Password is case sensitive)");
             return View(new Login { LoginID = loginID });
