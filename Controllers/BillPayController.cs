@@ -19,7 +19,7 @@ namespace Assignment2.Controllers
         public IActionResult Index(int id)
         {
             ViewBag.Id = id;
-            return View(_context.BillPay.Where(x => x.AccountNumber == id).ToList());
+            return View(_context.BillPay.Where(x => x.AccountNumber == id).OrderByDescending(x => x.ScheduleTimeUtc).ToList());
         }
 
         public IActionResult AddNewBillPay() => View();
