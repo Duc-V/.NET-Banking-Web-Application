@@ -28,8 +28,21 @@
                 @Html.ValidationMessage("Comment", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <input type="submit" value="Transfer" class="btn btn-primary" />
+                <input id="btnSubmit" type="submit" value="Transfer" class="btn btn-primary" />
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    $("#btnSubmit").click(function (e) {
+                        if (confirm("Are you sure?")) {
+                            console.log('Form is submitting');
+                            $("#sampleform").submit();
+                        } else {
+                            console.log('User clicked no.');
+                        }
+                    });
+                });
+            </script>
         </form>a
     </div>
 </div>
