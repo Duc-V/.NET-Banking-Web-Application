@@ -44,13 +44,4 @@ public class HomeController : Controller
 
         return RedirectToAction("Index", "Customer");
     }
-
-    [Route("LogoutNow")]
-    public IActionResult Logout()
-    {
-        // Logout customer.
-        HttpContext.Session.Clear();
-
-        return RedirectToAction("Index", "Home");
-    }
 }
