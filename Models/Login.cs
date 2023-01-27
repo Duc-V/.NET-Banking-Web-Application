@@ -19,3 +19,10 @@ public class Login
     [StringLength(94)]
     public string PasswordHash { get; set; }
 }
+
+
+public class AdminLogin
+{
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
