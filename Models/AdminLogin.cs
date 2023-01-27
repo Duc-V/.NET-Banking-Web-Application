@@ -3,19 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdminAPI.Models;
 
-public class Login
-    
-{   
-
-    [StringLength(8)]
-    public string LoginID { get; set; }
+public class LoginModel
+{
+    [Required]
+    public string Username { get; set; }
 
     [Required]
-    public int CustomerID { get; set; }
-    public virtual Customer Customer { get; set; }
-
-
-    [Required]
-    [StringLength(94)]
-    public string PasswordHash { get; set; }
+    public string Password { get; set; }
 }

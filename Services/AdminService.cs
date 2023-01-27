@@ -1,19 +1,36 @@
-﻿using AdminAPI.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using X.PagedList;
-namespace AdminAPI.Utilities;
-public static class MiscellaneousExtensionUtilities
-{
-    public static bool HasMoreThanNDecimalPlaces(this decimal value, int n) => decimal.Round(value, n) != value;
-    public static bool HasMoreThanTwoDecimalPlaces(this decimal value) => value.HasMoreThanNDecimalPlaces(2);
+﻿using System.Threading.Tasks;
+using AdminAPI.Models;
+using AdminAPI.Repositories;
 
-    public static IPagedList<Transaction> ConverterUtcTimeToLocalTime(IPagedList<Transaction> list)
+namespace AdminAPI.Services
+{
+    public class AdminService : IAdminService
     {
-        foreach(var transaction in list)
+        private readonly IAdminRepository _customerRepository;
+
+        public AdminService(IAdminRepository customerRepository)
         {
-            transaction.TransactionTimeUtc = transaction.TransactionTimeUtc.ToLocalTime(); 
+            _customerRepository = customerRepository;
         }
-        return list;
+
+        public async Task<bool> UpdateCustomer(int id, string name, string address, string city, string state, string postcode, string mobile, string tfn)
+        {
+            return await _customerRepository.UpdateCustomer(id, name, address, city, state, postcode, mobile, tfn);
+        }
+
+        public async Task<bool> LockCustomer(int id)
+        {
+            return await _customerRepository.LockCustomer(id);
+        }
+
+        public async Task<bool> UnlockCustomer(int id)
+        {
+            return await _customerRepository.UnlockCustomer(id);
+        }
+
+        public async Task<Customer> GetCustomerById(int id)
+        {
+            return await _customerRepository.GetCustomerById(id);
+        }
     }
 }
-

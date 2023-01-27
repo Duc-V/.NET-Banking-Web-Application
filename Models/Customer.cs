@@ -17,6 +17,9 @@ public class Customer
     [StringLength(40)]
     public string City { get; set; }
 
+    [StringLength(3)]
+    public string State { get; set; }
+
     [StringLength(4)]
     public string PostCode { get; set; }
 
@@ -25,6 +28,8 @@ public class Customer
 
     [StringLength(11)]
     public string TFN { get; set; }
+
+    public bool IsLocked { get; set; }
 
     public virtual List<Account> Accounts { get; set; }
     public virtual Login Login { get; set; }

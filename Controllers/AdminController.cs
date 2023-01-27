@@ -7,11 +7,11 @@ namespace AdminAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CustomerController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        private readonly ICustomerService _customerService;
+        private readonly IAdminService _customerService;
 
-        public CustomerController(ICustomerService customerService)
+        public AdminController(IAdminService customerService)
         {
             _customerService = customerService;
         }
@@ -60,5 +60,19 @@ namespace AdminAPI.Controllers
 
             return Ok();
         }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] AdminLogin model)
+        {
+            if (model.Username == "admin" && model.Password == "admin")
+            {
+                return Ok();
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
     }
+
 }

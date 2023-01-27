@@ -1,19 +1,13 @@
-﻿using AdminAPI.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using X.PagedList;
-namespace AdminAPI.Utilities;
-public static class MiscellaneousExtensionUtilities
-{
-    public static bool HasMoreThanNDecimalPlaces(this decimal value, int n) => decimal.Round(value, n) != value;
-    public static bool HasMoreThanTwoDecimalPlaces(this decimal value) => value.HasMoreThanNDecimalPlaces(2);
+﻿using System.Threading.Tasks;
+using AdminAPI.Models;
 
-    public static IPagedList<Transaction> ConverterUtcTimeToLocalTime(IPagedList<Transaction> list)
+namespace AdminAPI.Services
+{
+    public interface IAdminService
     {
-        foreach(var transaction in list)
-        {
-            transaction.TransactionTimeUtc = transaction.TransactionTimeUtc.ToLocalTime(); 
-        }
-        return list;
+        Task<bool> UpdateCustomer(int id, string name, string address, string city, string state, string postcode, string mobile, string tfn);
+        Task<bool> LockCustomer(int id);
+        Task<bool> UnlockCustomer(int id);
+        Task<Customer> GetCustomerById(int id);
     }
 }
-
