@@ -63,6 +63,10 @@ public class AdminRepository : IAdminRepository
         return await _context.SaveChangesAsync() > 0;
     }
 
+    public async Task<List<Customer>> GetAllCustomers()
+    {
+        return await _context.Customers.ToListAsync();
+    }
 
 
 

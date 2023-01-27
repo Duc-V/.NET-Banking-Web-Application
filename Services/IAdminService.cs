@@ -9,5 +9,6 @@ namespace AdminAPI.Services
         Task<bool> LockCustomer(int id);
         Task<bool> UnlockCustomer(int id);
         Task<Customer> GetCustomerById(int id);
+        Task<List<Customer>> GetAllCustomers();
     }
 }

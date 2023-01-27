@@ -32,5 +32,10 @@ namespace AdminAPI.Services
         {
             return await _customerRepository.GetCustomerById(id);
         }
+
+        public async Task<List<Customer>> GetAllCustomers()
+        {
+            return await _customerRepository.GetAllCustomers();
+        }
     }
 }
