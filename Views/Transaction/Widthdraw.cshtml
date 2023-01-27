@@ -1,4 +1,4 @@
-﻿@model Account
+﻿@model TransactionViewModel
 @{
     ViewData["Title"] = "Widthdraw";
 }
@@ -9,28 +9,17 @@
         <form asp-controller="Transaction" asp-action="Widthdraw">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label for="Amount" class="control-label">Amount</label>
-                <input id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
+                <label asp-for ="Amount" for="Amount" class="control-label">Amount</label>
+                <input asp-for="AccountNumber" type="hidden" />
+                <input asp-for ="AccountType" type= "hidden" />
+                <input asp-for="Amount"  id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
                        data-val="true" data-val-number="The field Amount must be a number."
                        data-val-required="The Amount field is required." />
                 @Html.ValidationMessage("Amount", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <input id="btnSubmit" type="submit" data-confirm=" " value="Widthdraw" class="btn btn-primary" />
+                <input id="btnSubmit" type="submit" value="Widthdraw" class="btn btn-primary" />
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
-            <script type="text/javascript">
-            $(function () {
-                $("#btnSubmit").click(function (e) {
-                    if (confirm("Are you sure?")) {
-                        console.log('Form is submitting');
-                        $("#sampleform").submit();
-                    } else {
-                       console.log('User clicked no.');
-                    }
-                });
-            });
-            </script>
         </form>
     </div>
 </div>
