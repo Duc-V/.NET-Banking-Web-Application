@@ -1,4 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewModel viewModel = null;
+
+    if (ViewData.Model is not null)
+    {
+        if (ViewData.Model is Customer)
+        {
+            viewModel = new ViewModel
+                    {
+                        Customer = ViewData.Model as Customer
+                    };
+        }
+        else if (ViewData.Model.GetType().GetProperty("Customer") != null)
+        {
+            viewModel = new ViewModel
+                    {
+                        Customer = ViewData.Model.Customer as Customer
+                    };
+        }
+    }
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +48,10 @@
                             <li class="nav-item">
                                 <span class="nav-link text-primary fw-bold">
                                     <a asp-controller="CustomerProfile" asp-action="Index" class="d-flex align-items-center btn-link">
-                                        <img src="https://api.dicebear.com/5.x/bottts-neutral/svg?seed=@Context.Session.GetInt32(nameof(Customer.CustomerID))"
-                                            class="img-fluid rounded" style="margin-right: 10px; width: 30px; height: 30px; object-fit: cover;">
+                                        @if (viewModel is not null)
+                                        {
+                                            await Html.RenderPartialAsync("_RenderProfilePicture", viewModel, new ViewDataDictionary(ViewData) { { "size", "icon" } });
+                                        }
                                         @Context.Session.GetString(nameof(Customer.Name))
                                     </a>
                                 </span>

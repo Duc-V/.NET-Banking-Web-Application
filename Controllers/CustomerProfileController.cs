@@ -76,10 +76,22 @@ public class CustomerProfileController : Controller
         _customer = await _context.Customers.FindAsync(CustomerID);
         
         var viewModel = new ViewModel();
+        
+        var customer = model.Customer;
+        var file = HttpContext.Request.Form.Files["Customer.ProfilePicture"];
+        if (file != null && file.Length > 0)
+        {
+            using (var ms = new MemoryStream())
+            {
+                await file.CopyToAsync(ms);
+                customer.ProfilePicture = ms.ToArray();
+            }
+        }
 
         if (!ModelState.IsValid)
         {
             viewModel = new ViewModel
+            
             {
                 Customer = _customer,
                 Errors = new string[] {"Some attributes don't follow the validation rules"}
@@ -89,6 +101,7 @@ public class CustomerProfileController : Controller
         }
 
         // Update the customer's information
+        _customer.ProfilePicture = model.Customer.ProfilePicture;
         _customer.Name = model.Customer.Name;
         _customer.Address = model.Customer.Address;
         _customer.City = model.Customer.City;
