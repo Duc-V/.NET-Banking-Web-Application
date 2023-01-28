@@ -123,10 +123,14 @@ public class TransactionController : Controller
     }
 
 
-    public IActionResult ConfirmTransaction(TransactionViewModel ViewModel) => View(ViewModel);
+    public IActionResult ConfirmTransaction(TransactionViewModel ViewModel)
+    {
+        return View(ViewModel);
+    } 
 
     [HttpPost]
     public async Task<IActionResult> ConfirmTransactionPost(TransactionViewModel ViewModel) {
+
         var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
 
         if (ViewModel.TransactionType == "Widthdraw")
@@ -136,16 +140,29 @@ public class TransactionController : Controller
             {
                 LogTransaction(account, -0.05m, "S", null);
             }
-            await _context.SaveChangesAsync();
         }
-        else
+        else if (ViewModel.TransactionType == "Deposit")
         {
 
             LogTransaction(account, ViewModel.Amount, "D", ViewModel.Comment);
 
-            await _context.SaveChangesAsync();
+            
         }
-        return RedirectToAction("Index", "Customer");
+        else
+        {
+            var BillPay = new BillPay
+            {
+                AccountNumber = ViewModel.AccountNumber,
+                PayeeID = ViewModel.DestinationAccountNumber,
+                Amount = ViewModel.Amount,
+                ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(ViewModel.DateTime, TimeZoneInfo.Local),
+                Period = ViewModel.Period
+            };
+            _context.BillPay.Add(BillPay);
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Menu", "Customer", new { id = ViewModel.AccountNumber });
 
     }
 

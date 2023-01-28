@@ -1,18 +1,20 @@
-﻿<div class="row">
+﻿@model TransactionViewModel
+
+<div class="row">
     <div class="col-md-4">
         <form asp-controller="BillPay" asp-action="AddNewBillPay">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label for="PayeeID" class="control-label">PayeeID</label>
-                <input id="PayeeID" name="PayeeID" class="form-control"
+                <label asp-for="DestinationAccountNumber" class="control-label">PayeeID</label>
+                <input asp-for="DestinationAccountNumber" id="DestinationAccountNumber" name="DestinationAccountNumber" class="form-control"
                        data-val="true" data-val-number="The field Amount must be a number."
                        data-val-required="The Amount field is required." />
-                @Html.ValidationMessage("PayeeID", new { @class = "text-danger" })
+                @Html.ValidationMessage("DestinationAccountNumber", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                <label for="Amount" class="control-label">Amount</label>
-                <input id="Amount" name="Amount" class="form-control"
+                <label asp-for="Amount" class="control-label">Amount</label>
+                <input asp-for="Amount"id="Amount" name="Amount" class="form-control"
                        data-val="true" data-val-number="The field Amount must be a number."
                        data-val-required="The Amount field is required." />
                 @Html.ValidationMessage("Amount", new { @class = "text-danger" })
@@ -20,35 +22,22 @@
             </div>
 
             <div class="form-group">
-                <label for="DateTime" class="control-label">Schedule Time</label>
-                <input type="datetime-local" id="DateTime" name="DateTime" class="form-control" data-val-required="The Schedule Time field is required."
-                       required/>
+                <label asp-for="DateTime" class="control-label">Schedule Time</label>
+                <input asp-for="DateTime" type="datetime-local" id="DateTime" name="DateTime" class="form-control" data-val-required="The Schedule Time field is required."
+                       required />
                 @Html.ValidationMessage("DateTime", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label for="Period" class="control-label">Repeat</label>
-                <select name="Period" id="Period" class="form-control">
+                <label asp-for="Period" class="control-label">Repeat</label>
+                <select asp-for="Period" name="Period" id="Period" class="form-control">
                     <option value="One-Off">One-Off</option>
                     <option value="Monthly">Monthly</option>
                 </select>
             </div>
             <div class="form-group">
-                <input id="btnSubmit" type="submit" value="ADD" class="btn btn-primary" 
+                <input id="btnSubmit" type="submit" value="ADD" class="btn btn-primary" />
             </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script type="text/javascript">
-                $(function () {
-                    $("#btnSubmit").click(function (e) {
-                        if (confirm("Are you sure?")) {
-                            console.log('Form is submitting');
-                            $("#sampleform").submit();
-                        } else {
-                            console.log('User clicked no.');
-                        }
-                    });
-                });
-            </script>
         </form>
     </div>
 </div>
-</div>
+
