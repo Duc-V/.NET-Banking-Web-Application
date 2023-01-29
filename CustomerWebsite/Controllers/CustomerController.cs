@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Assignment2.Data;
 using Assignment2.Filter;
-using Assignment2.Models;
+using MCBA_Library;
 using Assignment2.Utilities;
 namespace Assignment2.Controllers;
 
