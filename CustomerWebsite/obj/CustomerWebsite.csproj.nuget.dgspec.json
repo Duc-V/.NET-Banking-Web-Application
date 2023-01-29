@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\CustomerWebsite.csproj": {}
+    "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\CustomerWebsite\\CustomerWebsite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\CustomerWebsite.csproj": {
+    "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\CustomerWebsite\\CustomerWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\CustomerWebsite.csproj",
+        "projectUniqueName": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\CustomerWebsite\\CustomerWebsite.csproj",
         "projectName": "CustomerWebsite",
-        "projectPath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\CustomerWebsite.csproj",
+        "projectPath": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\CustomerWebsite\\CustomerWebsite.csproj",
         "packagesPath": "C:\\Users\\realz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\obj\\",
+        "outputPath": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\CustomerWebsite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\realz\\AppData\\Roaming\\NuGet\\NuGet.Config",

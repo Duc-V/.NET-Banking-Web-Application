@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\AdminAPI\\AdminAPI.csproj": {}
+    "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\AdminAPI\\AdminAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\AdminAPI\\AdminAPI.csproj": {
+    "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\AdminAPI\\AdminAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\AdminAPI\\AdminAPI.csproj",
+        "projectUniqueName": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\AdminAPI\\AdminAPI.csproj",
         "projectName": "AdminAPI",
-        "projectPath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\AdminAPI\\AdminAPI.csproj",
+        "projectPath": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\AdminAPI\\AdminAPI.csproj",
         "packagesPath": "C:\\Users\\realz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\AdminAPI\\obj\\",
+        "outputPath": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\AdminAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\realz\\AppData\\Roaming\\NuGet\\NuGet.Config",
