@@ -37,5 +37,15 @@ public class CustomerController : ControllerBase
     }
 
 
+    [HttpPut("{id}")]
+    public IActionResult UpdateCustomer(int id, [FromBody] Customer customer)
+    {
+        _repo.UpdateCustomer(customer, id);
+        return NoContent();
+    }
+
+
+
+
 
 }
