@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerWebsite", "Customer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAPI", "AdminAPI\AdminAPI.csproj", "{64F6167C-8E08-49E0-90A2-ABDC9AA4CACC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcMovie", "AdminWebsite\MvcMovie.csproj", "{B1138116-CCEE-4002-A3E6-1291C5C5BA14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminWebsite", "AdminWebsite\AdminWebsite.csproj", "{B1138116-CCEE-4002-A3E6-1291C5C5BA14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
