@@ -743,11 +743,6 @@
             "fileVersion": "8.4.3.0"
           }
         }
-      },
-      "MCBA Library/1.0.0": {
-        "runtime": {
-          "MCBA Library.dll": {}
-        }
       }
     }
   },
@@ -1288,11 +1283,6 @@
       "sha512": "sha512-f1M+6o0AGSUGBuIRiXl9PGfoFbymw8uKjcuA1pJb2XkfginndZg1UR9zgppXW0GMLWCMzCoD5uVGD3SSywSimQ==",
       "path": "x.pagedlist.mvc.core/8.4.3",
       "hashPath": "x.pagedlist.mvc.core.8.4.3.nupkg.sha512"
-    },
-    "MCBA Library/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

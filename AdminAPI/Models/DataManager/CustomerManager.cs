@@ -1,5 +1,5 @@
 ﻿using AdminAPI.Data;
-using MCBA_Library;
+using AdminAPI.Models;
 using AdminAPI.Models.Repository;
 
 namespace AdminAPI.Models.DataManager;

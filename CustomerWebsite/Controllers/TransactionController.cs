@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Assignment2.Data;
 using Assignment2.Filter;
-using MCBA_Library;
+using Assignment2.Models;
 using Assignment2.Utilities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using X.PagedList;

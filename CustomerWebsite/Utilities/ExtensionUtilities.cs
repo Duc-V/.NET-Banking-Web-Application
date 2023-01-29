@@ -1,4 +1,4 @@
-﻿using MCBA_Library;
+﻿using Assignment2.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
 namespace Assignment2.Utilities;

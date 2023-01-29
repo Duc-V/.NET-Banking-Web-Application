@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MCBA_Library;
+using AdminAPI.Models;
 
 namespace AdminAPI.Data;
 

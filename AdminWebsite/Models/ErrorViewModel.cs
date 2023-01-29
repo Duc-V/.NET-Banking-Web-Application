@@ -1,4 +1,4 @@
-namespace MCBA_Library
+namespace AdminWebsite.Models
 {
     public class ErrorViewModel
     {

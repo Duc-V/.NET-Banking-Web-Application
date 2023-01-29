@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MCBA_Library;
+using Assignment2.Models;
 namespace Assignment2.Data;
 
 public class McbaContext : DbContext

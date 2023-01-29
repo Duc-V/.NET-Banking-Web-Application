@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleHashing.Net;
 using Assignment2.Data;
-using MCBA_Library;
+using Assignment2.Models;
 
 namespace Assignment2.Controllers;
 

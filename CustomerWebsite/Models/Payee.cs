@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace MCBA_Library
+namespace Assignment2.Models
 {
     public class Payee
     {

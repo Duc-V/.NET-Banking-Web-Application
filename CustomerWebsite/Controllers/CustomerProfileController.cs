@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Assignment2.Data;
-using MCBA_Library;
+using Assignment2.Models;
 using SimpleHashing.Net;
 using Assignment2.Filter;
 using Microsoft.AspNetCore.Authorization;

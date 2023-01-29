@@ -1,82 +1,11 @@
-﻿@using MCBA_Library;
-
-@model IEnumerable<Customer>
+﻿@model IEnumerable<Customer>
 @{
-    ViewData["Title"] = "Customers";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Customers</h1>
+<h1>Index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Customer ID
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                TFN
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                PostCode
-            </th>
-            <th>
-                Mobile
-            </th>
-            <th>
-                Profile Picture
-            </th>
-            <th>
-                Accounts
-            </th>
-            <th>
-                Login
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.CustomerID
-                </td>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @item.TFN
-                </td>
-                <td>
-                    @item.Address
-                </td>
-                <td>
-                    @item.City
-                </td>
-                <td>
-                    @item.PostCode
-                </td>
-                <td>
-                    @item.Mobile
-                </td>
-                <td>
-                    @item.ProfilePicture
-                </td>
-                <td>
-                    @item.Accounts
-                </td>
-                <td>
-                    @item.Login
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+

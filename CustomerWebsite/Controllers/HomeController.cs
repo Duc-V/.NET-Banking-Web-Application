@@ -1,8 +1,8 @@
 ﻿using Assignment2.Data;
 using Assignment2.Filter;
-using MCBA_Library;
+using Assignment2.Models;
 using Microsoft.AspNetCore.Mvc;
-using SimpleHashing.Net;    
+using SimpleHashing.Net;
 using System.Diagnostics;
 
 namespace Assignment2.Controllers;

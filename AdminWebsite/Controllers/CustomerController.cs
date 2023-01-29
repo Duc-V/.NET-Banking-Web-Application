@@ -1,22 +1,22 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using MCBA_Library;
+using AdminWebsite.Models;
 using Newtonsoft.Json;
 
-namespace AdminWebsite.Controllers;
+namespace MvcMovie.Controllers;
 
-public class CustomerController : Controller
+public class MoviesController : Controller
 {
     private readonly IHttpClientFactory _clientFactory;
     private HttpClient Client => _clientFactory.CreateClient("api");
 
-    public CustomerController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
+    public MoviesController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
-    // GET: Customers/Index
+    // GET: Movies/Index
     public async Task<IActionResult> Index()
     {
-        var response = await Client.GetAsync("api/customer");
-
+        var response = await Client.GetAsync("api/customers");
+        //var response = await MovieApi.InitializeClient().GetAsync("api/movies");
 
         if(!response.IsSuccessStatusCode)
             throw new Exception();
@@ -25,10 +25,10 @@ public class CustomerController : Controller
         var result = await response.Content.ReadAsStringAsync();
 
         // Deserializing the response received from web api and storing into a list.
-        var Customers = JsonConvert.DeserializeObject<List<Customer>>(result);
+        var movies = JsonConvert.DeserializeObject<List<Customer>>(result);
 
-        return View(Customers);
+        return View(movies);
     }
 
-
+    
 }
