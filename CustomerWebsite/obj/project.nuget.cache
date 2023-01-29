@@ -1,14 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "kPNuKdiGuosbcNWByVPwbSFeL2ZI9xjmWhFGrAGBupTZMnLTcyZLYtYTBh54KFlUmc2spwerBv0HW8A53egxiw==",
+  "dgSpecHash": "x59z4/czsbFidx9L8HGpfiCpsl1wZ+6g6AgDfF96ah4KCCRHNqxvvugUnABBVYQAHvBJEY0qLuhU7pf3U6JL2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite.csproj",
+  "projectFilePath": "C:\\Users\\realz\\OneDrive\\Desktop\\Assignment2_Group4\\Assignment2_Group4\\CustomerWebsite\\CustomerWebsite.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\realz\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\castle.core\\5.1.0\\castle.core.5.1.0.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\jetbrains.annotations\\2022.1.0\\jetbrains.annotations.2022.1.0.nupkg.sha512",
+    "C:\\Users\\realz\\.nuget\\packages\\magick.net-q8-anycpu\\12.2.2\\magick.net-q8-anycpu.12.2.2.nupkg.sha512",
+    "C:\\Users\\realz\\.nuget\\packages\\magick.net.core\\12.2.2\\magick.net.core.12.2.2.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\realz\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
