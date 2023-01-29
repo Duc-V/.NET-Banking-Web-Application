@@ -9,7 +9,7 @@ public interface ICustomerRepository<TEntity, TKey> where TEntity : class
     Customer Get(int id);
 
     // take in id and update respective customer.
-    void Update(TEntity entity, TKey id);
+    //void Update(TEntity entity, TKey id);
 
 
 }
