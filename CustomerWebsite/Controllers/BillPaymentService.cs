@@ -1,6 +1,6 @@
 ﻿using Assignment2.Data;
 using Assignment2.Filter;
-using Assignment2.Models;
+using MCBA_Library;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

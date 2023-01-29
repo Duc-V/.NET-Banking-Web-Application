@@ -1,0 +1,82 @@
+﻿@using MCBA_Library;
+
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Customer ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                TFN
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                PostCode
+            </th>
+            <th>
+                Mobile
+            </th>
+            <th>
+                Profile Picture
+            </th>
+            <th>
+                Accounts
+            </th>
+            <th>
+                Login
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.customerID
+                </td>
+                <td>
+                    @item.name
+                </td>
+                <td>
+                    @item.tfn
+                </td>
+                <td>
+                    @item.address
+                </td>
+                <td>
+                    @item.city
+                </td>
+                <td>
+                    @item.postCode
+                </td>
+                <td>
+                    @item.mobile
+                </td>
+                <td>
+                    @item.profilePicture
+                </td>
+                <td>
+                    @item.accounts
+                </td>
+                <td>
+                    @item.login
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

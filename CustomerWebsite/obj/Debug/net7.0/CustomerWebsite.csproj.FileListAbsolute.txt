@@ -199,3 +199,15 @@ C:\Users\realz\OneDrive\Desktop\Assignment2_Group4\Assignment2_Group4\CustomerWe
 C:\Users\realz\OneDrive\Desktop\Assignment2_Group4\Assignment2_Group4\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.csproj.CopyComplete
 C:\Users\realz\OneDrive\Desktop\Assignment2_Group4\Assignment2_Group4\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.genruntimeconfig.cache
 C:\Users\realz\OneDrive\Desktop\Assignment2_Group4\Assignment2_Group4\CustomerWebsite\obj\Debug\net7.0\ref\CustomerWebsite.dll
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.csproj.AssemblyReference.cache
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.AssemblyInfoInputs.cache
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.AssemblyInfo.cs
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.csproj.CoreCompileInputs.cache
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.RazorAssemblyInfo.cache
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.RazorAssemblyInfo.cs
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.dll
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\refint\CustomerWebsite.dll
+C:\Users\realz\OneDrive\Desktop\finalproject\CustomerWebsite\obj\Debug\net7.0\CustomerWebsite.pdb

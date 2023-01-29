@@ -1,9 +1,9 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Mime;
 
-namespace MvcMovie.Web.Helper;
+namespace AdminWebsite.Web.Helper;
 
-public static class MovieApi
+public static class AdminApi
 {
     private const string ApiBaseUri = "http://localhost:5000";
 

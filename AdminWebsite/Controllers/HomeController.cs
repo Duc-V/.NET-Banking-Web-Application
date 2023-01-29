@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using AdminWebsite.Models;
+using MCBA_Library;
 
 namespace AdminWebsite.Controllers;
 
@@ -16,7 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return RedirectToAction("Index", "Movies");
+        return RedirectToAction("Index", "Customers");
     }
 
     public IActionResult Privacy()

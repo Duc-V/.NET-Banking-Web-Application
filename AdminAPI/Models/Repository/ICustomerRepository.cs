@@ -1,4 +1,5 @@
-﻿namespace AdminAPI.Models.Repository;
+﻿using MCBA_Library;
+namespace AdminAPI.Models.Repository;
 
 public interface ICustomerRepository
 {

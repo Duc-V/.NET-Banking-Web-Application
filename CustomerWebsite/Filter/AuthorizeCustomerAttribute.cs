@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Assignment2.Models;
+using MCBA_Library;
 
 namespace Assignment2.Filter;
 

@@ -23,5 +23,8 @@
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\MCBA Library\MCBA Library.csproj" />
+	</ItemGroup>
 
 </Project>

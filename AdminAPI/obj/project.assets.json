@@ -1226,6 +1226,16 @@
             "rid": "win"
           }
         }
+      },
+      "MCBA Library/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/MCBA Library.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MCBA Library.dll": {}
+        }
       }
     }
   },
@@ -3862,10 +3872,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "MCBA Library/1.0.0": {
+      "type": "project",
+      "path": "../MCBA Library/MCBA Library.csproj",
+      "msbuildProject": "../MCBA Library/MCBA Library.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "MCBA Library >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.1",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.2",
@@ -3898,7 +3914,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\MCBA Library\\MCBA Library.csproj": {
+              "projectPath": "C:\\Users\\realz\\OneDrive\\Desktop\\finalproject\\MCBA Library\\MCBA Library.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

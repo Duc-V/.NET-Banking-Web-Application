@@ -1,4 +1,4 @@
-namespace Assignment2.Models
+namespace MCBA_Library
 {
     public class ErrorViewModel
     {

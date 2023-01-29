@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "MvcMovie": {
+    "AdminWebsite": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5100",
