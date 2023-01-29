@@ -1,0 +1,56 @@
+﻿[
+  {
+    "PayeeID": 8080,
+    "Name": "Octopus",
+    "Address": "400 Bozo Ratioed Avenue",
+    "City": "Melbourne",
+    "State": "VIC",
+    "Postcode": "3280",
+    "Phone": "0474819995",
+    "BillPay": [
+      {
+        "BillPayID": 1000,
+        "AccountNumber": 4100,
+        "Amount": 100.00,
+        "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
+        "Period": "O"
+      }
+    ]
+  },
+  {
+    "PayeeID": 9090,
+    "Name": "Teslza",
+    "Address": "420 Capping Town Drive",
+    "City": "Melbourne",
+    "State": "VIC",
+    "Postcode": "3277",
+    "Phone": "0474880995",
+    "BillPay": [
+      {
+        "BillPayID": 1002,
+        "AccountNumber": 4100,
+        "Amount": 70.00,
+        "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
+        "Period": "M"
+      }
+    ]
+  },
+  {
+    "PayeeID": 6663,
+    "Name": "RMRizz",
+    "Address": "555 Diabetes Road",
+    "City": "Melbourne",
+    "State": "VIC",
+    "Postcode": "3247",
+    "Phone": "0474889999",
+    "BillPay": [
+      {
+        "BillPayID": 1006,
+        "AccountNumber": 4101,
+        "Amount": 111.00,
+        "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
+        "Period": "M"
+      }
+    ]
+  }
+]
