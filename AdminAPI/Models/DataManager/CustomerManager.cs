@@ -4,7 +4,7 @@ using AdminAPI.Models.Repository;
 
 namespace AdminAPI.Models.DataManager;
 
-public class CustomerManager : ICustomerRepository<Customer, int>
+public class CustomerManager : ICustomerRepository
 {
     private readonly McbaContext _context;
 
@@ -40,8 +40,8 @@ public IEnumerable<Customer> GetAll()
 
         return customer;
     }
-
-    public void UpdateCustomer(int id, Customer customer)
+   
+    public void UpdateCustomer(Customer customer, int id)
     {
         var customerToUpdate = _context.Customers.FirstOrDefault(c => c.CustomerID == id);
 
