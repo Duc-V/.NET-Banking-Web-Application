@@ -8,6 +8,7 @@ using System.Data;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using ImageMagick;
 
 namespace Assignment2.Controllers;
 
@@ -81,10 +82,22 @@ public class CustomerProfileController : Controller
         var file = HttpContext.Request.Form.Files["Customer.ProfilePicture"];
         if (file != null && file.Length > 0)
         {
-            using (var ms = new MemoryStream())
+            using (MagickImage image = new MagickImage(file.OpenReadStream()))
             {
-                await file.CopyToAsync(ms);
-                customer.ProfilePicture = ms.ToArray();
+                if (image.Width > image.Height)
+                {
+                    image.Resize(400, 0);
+                } else if(image.Height > image.Width)
+                {
+                    image.Resize(0, 400);
+                } else
+                {
+                    // Equal
+                    image.Resize(400, 400);
+                }
+
+                image.Format = MagickFormat.Jpeg;
+                customer.ProfilePicture = image.ToByteArray();
             }
         }
 

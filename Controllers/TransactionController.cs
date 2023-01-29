@@ -9,6 +9,7 @@ using Castle.Core.Resource;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
+using System;
 
 namespace Assignment2.Controllers;
 [AuthorizeCustomer]
@@ -20,82 +21,149 @@ public class TransactionController : Controller
 
     public TransactionController(McbaContext context) => _context = context;
 
-    public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
-
-    [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount, string comment = null)
+    public IActionResult Deposit(int id)
     {
-        var account = await _context.Accounts.FindAsync(id);
-
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.HasMoreThanTwoDecimalPlaces())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (comment != null && comment.Length > 30)
-            ModelState.AddModelError(nameof(comment), "Only 30 characters are allowed");
-        if (!ModelState.IsValid)
+        var _CustomerID = HttpContext.Session.GetInt32("CustomerID");
+        var account = _context.Accounts.FirstOrDefault(x => (x.CustomerID == _CustomerID) && (x.AccountNumber == id));
+        if (account == null)
         {
-            ViewBag.Amount = amount;
-            return View(account);
+            return RedirectToAction("Menu", "Customer", new { id = id });
         }
 
-        LogTransaction(account, amount, "D", comment);
+        var ViewModel = new TransactionViewModel
+        {
+            AccountNumber = account.AccountNumber,
+            AccountType = account.AccountType,
+        };
+        return View(ViewModel);
+    }
 
-        await _context.SaveChangesAsync();
+    [HttpPost]
+    public async Task<IActionResult> Deposit(TransactionViewModel ViewModel)
+    {
+        var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
 
-        return RedirectToAction("Index", "Customer");
+        if (ViewModel.Amount <= 0)
+            ModelState.AddModelError(nameof(ViewModel.Amount), "Amount must be positive.");
+        if (ViewModel.Amount.HasMoreThanTwoDecimalPlaces())
+            ModelState.AddModelError(nameof(ViewModel.Amount), "Amount cannot have more than 2 decimal places.");
+        if (ViewModel.Comment != null && ViewModel.Comment.Length > 30)
+            ModelState.AddModelError(nameof(ViewModel.Comment), "Only 30 characters are allowed");
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = ViewModel.Amount;
+            return View(ViewModel);
+        }
+
+        ViewModel.TransactionType = "Deposit";
+
+        return RedirectToAction("ConfirmTransaction", ViewModel);
     }
 
 
-    public async Task<IActionResult> Widthdraw(int id) => View(await _context.Accounts.FindAsync(id));
 
-    [HttpPost]
-    public async Task<IActionResult> Widthdraw(int id, decimal amount)
-    {
-        var account = await _context.Accounts.FindAsync(id);
-
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.HasMoreThanTwoDecimalPlaces())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (!ModelState.IsValid)
+    public IActionResult Widthdraw(int id) {
+        var _CustomerID = HttpContext.Session.GetInt32("CustomerID");
+        var account = _context.Accounts.FirstOrDefault(x => ( x.CustomerID == _CustomerID ) && (x.AccountNumber == id));
+        if (account == null)
         {
-            ViewBag.Amount = amount;
-            return View(account);
+            return RedirectToAction("Menu", "Customer", new {id = id});
         }
 
+        var ViewModel = new TransactionViewModel
+        {
+            AccountNumber = account.AccountNumber,
+            AccountType = account.AccountType,
+        };
+        return View(ViewModel);
+    }
 
-        // check if service fee should be charged
+    [HttpPost]
+    public async Task<IActionResult> Widthdraw(TransactionViewModel ViewModel)
+    {
+        var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
         bool chargeFee = await chargefee(account.AccountNumber);
         decimal serviceFee = 0.05m;
         decimal minimumAmount = 0;
+        
+
+        if (ViewModel.Amount <= 0)
+            ModelState.AddModelError(nameof(ViewModel.Amount), "Amount must be positive.");
+        if (ViewModel.Amount.HasMoreThanTwoDecimalPlaces())
+            ModelState.AddModelError(nameof(ViewModel.Amount), "Amount cannot have more than 2 decimal places.");
+
+        // check if service fee should be charged
+
         if (account.AccountType == "Checkings")
-        {
             minimumAmount = 300;
-        }
         if (chargeFee)
         {
-            serviceFee = 0.05m;
             minimumAmount += serviceFee;
-            if (amount < minimumAmount)
+            if ((account.Balance - ViewModel.Amount) < minimumAmount)
             {
-                ModelState.AddModelError(nameof(amount), "Minimum withdraw amount is " + minimumAmount.ToString());
-                return View(account);
+                ModelState.AddModelError(nameof(ViewModel.Amount), "Insuffcient funds");
             }
         }
-        LogTransaction(account, -amount, "W", null);
-        if (chargeFee)
-        {
-            LogTransaction(account, -serviceFee, "S", null);
-        }
-        if (account.Balance < 0)
-        {
-            ModelState.AddModelError(nameof(amount), "Insuffcient funds");
-            return View(account);
-        }
-        await _context.SaveChangesAsync();
 
-        return RedirectToAction("Index", "Customer");
+        if ((account.Balance - ViewModel.Amount) < 0)
+            ModelState.AddModelError(nameof(ViewModel.Amount), "Insuffcient funds");
+
+
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = ViewModel.Amount;
+            return View(ViewModel);
+        }
+        //set chargeFee to ViewModel
+        ViewModel.chargeFee = chargeFee;
+        //set transaction typ to ViewModel
+        ViewModel.TransactionType = "Widthdraw";
+
+        return RedirectToAction("ConfirmTransaction", ViewModel);
+    }
+
+
+    public IActionResult ConfirmTransaction(TransactionViewModel ViewModel)
+    {
+        return View(ViewModel);
+    } 
+
+    [HttpPost]
+    public async Task<IActionResult> ConfirmTransactionPost(TransactionViewModel ViewModel) {
+
+        var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
+
+        if (ViewModel.TransactionType == "Widthdraw")
+        {
+            LogTransaction(account, -ViewModel.Amount, "W", null);
+            if (ViewModel.chargeFee)
+            {
+                LogTransaction(account, -0.05m, "S", null);
+            }
+        }
+        else if (ViewModel.TransactionType == "Deposit")
+        {
+
+            LogTransaction(account, ViewModel.Amount, "D", ViewModel.Comment);
+
+            
+        }
+        else
+        {
+            var BillPay = new BillPay
+            {
+                AccountNumber = ViewModel.AccountNumber,
+                PayeeID = ViewModel.DestinationAccountNumber,
+                Amount = ViewModel.Amount,
+                ScheduleTimeUtc = TimeZoneInfo.ConvertTimeToUtc(ViewModel.DateTime, TimeZoneInfo.Local),
+                Period = ViewModel.Period
+            };
+            _context.BillPay.Add(BillPay);
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Menu", "Customer", new { id = ViewModel.AccountNumber });
+
     }
 
 

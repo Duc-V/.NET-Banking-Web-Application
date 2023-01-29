@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment2.Models
@@ -23,10 +24,9 @@ namespace Assignment2.Models
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]
         public decimal Amount { get; set; }
-        
+
         // Date
         [DataType(DataType.DateTime)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime ScheduleTimeUtc { get; set; }
 
         // Period

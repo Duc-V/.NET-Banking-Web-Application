@@ -1,0 +1,51 @@
+﻿@model TransactionViewModel
+@{
+    ViewData["Title"] = "Widthdraw";
+}
+<h1 class="display-5">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+@if (Model.TransactionType == "BillPay")
+{
+    <h3 class="display-6">Payee ID : $@Model.DestinationAccountNumber </h3>
+    <h3 class="display-6">Amount : $@Model.Amount </h3>
+    <h3 class="display-6">Time: @Model.DateTime </h3>
+    <h3 class="display-6">Period : @Model.Period </h3>
+}else{
+    
+    <h3 class="display-6">Amount : $@Model.Amount </h3>
+}
+@if (Model.TransactionType == "Deposit")
+{
+    <h3 class="display-6">Comment : @Model.Comment </h3>
+}
+<h3 class="navbar-text">Confirm your @Model.TransactionType</h3>
+
+
+
+
+<form asp-action="ConfirmTransactionPost">
+    <input asp-for="AccountNumber" type="hidden"/>
+    <input asp-for="DestinationAccountNumber" type="hidden"/>
+    <input asp-for="TransactionType" type="hidden" />
+    <input asp-for="Amount" type="hidden" />
+    <input asp-for="DateTime" type="hidden" />
+    <input asp-for="Comment" type="hidden" />
+    <input asp-for="DateTime" type="datetime-local" id="DateTime" name="DateTime" type="hidden" />
+    <input asp-for="Period" type="hidden" />
+    <input asp-for="chargeFee" type="hidden" />
+
+    <div class="form-group">
+        <input class ="btn btn-danger" type="submit" value="Confirm" />
+        <a class ="btn btn-primary" asp-controller="Customer" asp-action="Menu" asp-route-id="@Model.AccountNumber" >Back to Menu</a>
+    </div>
+</form>
+
+
+    
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+}
