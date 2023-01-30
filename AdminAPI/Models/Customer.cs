@@ -20,6 +20,10 @@ public class Customer
     [StringLength(40)]
     public string City { get; set; }
 
+
+    [StringLength(3)]
+    public string State { get; set; }
+
     [StringLength(4)]
     public string PostCode { get; set; }
 

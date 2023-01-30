@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Assignment2.Migrations
+namespace CustomerWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,9 +20,10 @@ namespace Assignment2.Migrations
                     TFN = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
-                    ProfilePicture = table.Column<byte[]>(nullable: true)
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {

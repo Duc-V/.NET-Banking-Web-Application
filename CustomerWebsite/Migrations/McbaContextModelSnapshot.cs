@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Assignment2.Migrations
+namespace CustomerWebsite.Migrations
 {
     [DbContext(typeof(McbaContext))]
     partial class McbaContextModelSnapshot : ModelSnapshot
@@ -109,6 +109,13 @@ namespace Assignment2.Migrations
                     b.Property<string>("PostCode")
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
+
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("State")
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("TFN")
                         .HasMaxLength(11)

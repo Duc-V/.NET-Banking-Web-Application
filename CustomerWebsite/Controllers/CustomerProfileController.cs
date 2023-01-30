@@ -118,7 +118,10 @@ public class CustomerProfileController : Controller
         _customer.Name = model.Customer.Name;
         _customer.Address = model.Customer.Address;
         _customer.City = model.Customer.City;
+        _customer.State= model.Customer.State;
         _customer.PostCode = model.Customer.PostCode;
+        _customer.TFN= model.Customer.TFN;
+        _customer.Mobile= model.Customer.Mobile;
         _context.Customers.Update(_customer);
         
         HttpContext.Session.SetString(nameof(Customer.Name), model.Customer.Name);
