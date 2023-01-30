@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Assignment2.Controllers;
 [AuthorizeCustomer]
@@ -41,6 +42,7 @@ public class TransactionController : Controller
     [HttpPost]
     public async Task<IActionResult> Deposit(TransactionViewModel ViewModel)
     {
+        ModelState.Clear();
         var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
 
         if (ViewModel.Amount <= 0)
@@ -81,6 +83,7 @@ public class TransactionController : Controller
     [HttpPost]
     public async Task<IActionResult> Widthdraw(TransactionViewModel ViewModel)
     {
+        ModelState.Clear();
         var account = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
         bool chargeFee = await chargefee(account.AccountNumber);
         decimal serviceFee = 0.05m;
@@ -148,7 +151,7 @@ public class TransactionController : Controller
 
             
         }
-        else
+        else if (ViewModel.TransactionType == "BillPay")
         {
             var BillPay = new BillPay
             {
@@ -160,6 +163,26 @@ public class TransactionController : Controller
             };
             _context.BillPay.Add(BillPay);
         }
+        else if(ViewModel.TransactionType == "Transfer")
+        {
+            var sourceAccount = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
+            var destinationAccount = await _context.Accounts.FindAsync(ViewModel.DestinationAccountNumber);
+
+            // Outgoing transfer
+            LogTransaction(sourceAccount, -ViewModel.Amount, "T", ViewModel.Comment, ViewModel.DestinationAccountNumber);
+
+            // Service fee
+            if (ViewModel.chargeFee)
+            {
+                LogTransaction(sourceAccount, -0.10m, "S", null, null);
+            }
+
+            // Incoming transfer
+            LogTransaction(destinationAccount, ViewModel.Amount, "T", ViewModel.Comment);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Customer");
+        }
 
         await _context.SaveChangesAsync();
         return RedirectToAction("Menu", "Customer", new { id = ViewModel.AccountNumber });
@@ -167,33 +190,62 @@ public class TransactionController : Controller
     }
 
 
-    public async Task<IActionResult> Transfer(int id) => View(await _context.Accounts.FindAsync(id));
+    public IActionResult Transfer(int id)
+    {
+        var _CustomerID = HttpContext.Session.GetInt32("CustomerID");
+        var account = _context.Accounts.FirstOrDefault(x => (x.CustomerID == _CustomerID) && (x.AccountNumber == id));
+        if (account == null)
+        {
+            return RedirectToAction("Menu", "Customer", new { id = id });
+        }
+
+        var ViewModel = new TransactionViewModel
+        {
+            AccountType = account.AccountType, 
+            AccountNumber = account.AccountNumber,
+
+        };
+        return View(ViewModel);
+    
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Transfer(int id, int destinationId, decimal amount, string comment = null)
+    public async Task<IActionResult> Transfer(TransactionViewModel ViewModel)
     {
-        // Find the source and destination accounts using the provided id and destinationId
-        var sourceAccount = await _context.Accounts.FindAsync(id);
-        var destinationAccount = await _context.Accounts.FindAsync(destinationId);
 
-        // Check if the transfer amount is valid
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.HasMoreThanTwoDecimalPlaces())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (comment != null && comment.Length > 30)
-            ModelState.AddModelError(nameof(comment), "Only 30 characters are allowed");
+        ModelState.Clear();
+
+        // Find the source and destination accounts using the provided id and destinationId
+        var sourceAccount = await _context.Accounts.FindAsync(ViewModel.AccountNumber);
+        var destinationAccount = await _context.Accounts.FindAsync(ViewModel.DestinationAccountNumber);
+
+
+
+
+        //Check if the transfer amount is valid
+        if (ViewModel.DestinationAccountNumber == ViewModel.AccountNumber)
+            ModelState.AddModelError("DestinationAccountNumber", "Can't transfer to the same account");
+        if ((sourceAccount.Balance - ViewModel.Amount) < 0)
+            ModelState.AddModelError("Amount", "Not Enough Funds");
+
+        if (ViewModel.Amount <= 0)
+            ModelState.AddModelError("Amount", "Amount must be positive.");
+
+        if (ViewModel.Amount.HasMoreThanTwoDecimalPlaces())
+            ModelState.AddModelError("Amount", "Amount cannot have more than 2 decimal places.");
         if (!ModelState.IsValid)
         {
-            ViewBag.Amount = amount;
-            return View(sourceAccount);
+            ViewBag.Amount = ViewModel.Amount;
+            return View(ViewModel);
         }
+
+
 
         // check if service fee should be charged
         bool chargeFee = await chargefee(sourceAccount.AccountNumber);
         decimal serviceFee = 0.10m;
         decimal minimumAmount = 0;
-        if (sourceAccount.AccountType == "Checkings")
+        if (sourceAccount.AccountType == "Checking")
         {
             minimumAmount = 300;
         }
@@ -202,37 +254,25 @@ public class TransactionController : Controller
             serviceFee = 0.10m;
             minimumAmount += serviceFee;
         }
-        if (amount < minimumAmount)
+        if ((sourceAccount.Balance - ViewModel.Amount) < minimumAmount)
         {
-            ModelState.AddModelError(nameof(amount), "Minimum transfer amount is " + minimumAmount.ToString());
-            return View(sourceAccount);
+            ModelState.AddModelError("Amount", $"Not Enough Funds For {sourceAccount.AccountType} Account");
+            return View(ViewModel);
         }
 
         if (destinationAccount != null)
         {
-            // Outgoing transfer
-            LogTransaction(sourceAccount, -amount, "T", comment, _destinationAccountnumber: destinationAccount.AccountNumber);
-            sourceAccount.Balance -= amount;
+            ViewModel.chargeFee = chargeFee;
+            ViewModel.TransactionType = "Transfer";
 
-            // Service fee
-            if (chargeFee)
-            {
-                LogTransaction(sourceAccount, -serviceFee, "S", null, null);
-                sourceAccount.Balance -= serviceFee;
-            }
-
-            // Incoming transfer
-            LogTransaction(destinationAccount, amount, "T", comment);
-            destinationAccount.Balance += amount;
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("ConfirmTransaction", ViewModel);
         }
         else
         {
-            ModelState.AddModelError(nameof(destinationId), "Invalid account number");
-            return View(sourceAccount);
+            ModelState.AddModelError("DestinationAccountNumber", "Invalid account number");
+            return View(ViewModel);
         }
+
     }
 
 

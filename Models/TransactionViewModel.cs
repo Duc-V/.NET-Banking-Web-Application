@@ -20,5 +20,6 @@ public class TransactionViewModel
     public string Comment { get; set; }
 
     public bool chargeFee { get; set; }
+
     
 }

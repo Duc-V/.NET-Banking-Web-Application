@@ -19,7 +19,7 @@ public static class SeedData
         using var client = new HttpClient();
         var json = client.GetStringAsync("https://coreteaching01.csit.rmit.edu.au/~e103884/wdt/services/customers/").Result;
 
-
+        
         var Customers = JsonConvert.DeserializeObject<List<Customer>>(json, new JsonSerializerSettings
         {
             DateFormatString = "dd/MM/yyyy hh:mm:ss tt"
