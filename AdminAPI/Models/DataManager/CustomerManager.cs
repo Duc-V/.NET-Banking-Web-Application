@@ -20,7 +20,11 @@ public IEnumerable<Customer> GetAll()
         .Select(c => new Customer
         {
             CustomerID = c.CustomerID,
-            Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name
+            Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
+            Address = c.Address ?? "null",
+            City= c.City ?? "null",
+            PostCode= c.PostCode ?? "null",
+            Mobile = c.Mobile ?? "null"
         })
         .ToList();
 }
@@ -32,8 +36,11 @@ public IEnumerable<Customer> GetAll()
             .Select(c => new Customer
             {
                 CustomerID = c.CustomerID,
-                Name = c.Name ?? "null",
+                Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
                 Address = c.Address ?? "null",
+                City = c.City ?? "null",
+                PostCode = c.PostCode ?? "null",
+                Mobile = c.Mobile ?? "null"
 
             })
             .FirstOrDefault();

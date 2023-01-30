@@ -15,37 +15,11 @@ public class CustomersController : Controller
     // GET: Customers/Index
 
 
+
+
     public async Task<IActionResult> Index()
     {
-        return View(new LoginModel());
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Login(LoginModel model)
-    {
-        var values = new Dictionary<string, string>
-    {
-        { "username", model.UserName },
-        { "password", model.Password }
-    };
-
-        var response = await Client.PostAsync("api/login", new FormUrlEncodedContent(values));
-
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Customers", "Customer");
-        }
-        else
-        {
-            ModelState.AddModelError("", "Incorrect username or password");
-            return View("Index", model);
-        }
-    }
-
-
-    public async Task<IActionResult> Customer()
-    {
-        var response = await Client.GetAsync("api/customers");
+        var response = await Client.GetAsync("api/Customers");
 
         if (!response.IsSuccessStatusCode)
             throw new Exception();

@@ -1,25 +1,33 @@
-﻿@model LoginModel
+﻿@model IEnumerable<Customer>
 
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <form method="post">
-            <div asp-validation-summary="All"></div>
+@{
+    ViewData["Title"] = "Customers";
+}
 
-            <div class="form-group">
-                <label asp-for="UserName"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
+<h1>Customers</h1>
 
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>TFN</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>PostCode</th>
+            <th>Mobile</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.TFN</td>
+                <td>@customer.Address</td>
+                <td>@customer.City</td>
+                <td>@customer.PostCode</td>
+                <td>@customer.Mobile</td>
+            </tr>
+        }
+    </tbody>
+</table>
