@@ -21,6 +21,7 @@ public IEnumerable<Customer> GetAll()
         {
             CustomerID = c.CustomerID,
             Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
+            TFN = c.TFN ?? "null",
             Address = c.Address ?? "null",
             City= c.City ?? "null",
             PostCode= c.PostCode ?? "null",
@@ -37,6 +38,7 @@ public IEnumerable<Customer> GetAll()
             {
                 CustomerID = c.CustomerID,
                 Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
+                TFN = c.TFN ?? "null",
                 Address = c.Address ?? "null",
                 City = c.City ?? "null",
                 PostCode = c.PostCode ?? "null",
