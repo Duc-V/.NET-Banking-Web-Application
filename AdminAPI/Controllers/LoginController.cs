@@ -1,41 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
-using AdminAPI.Models;
-using AdminAPI.Models.DataManager;
 
-namespace AdminAPI.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class CustomerController : ControllerBase
+namespace AdminAPI.Controllers
 {
-    private readonly CustomerManager _repo;
-
-    public CustomerController(CustomerManager repo)
-    { 
-        _repo = repo; 
-    }
-
-    // GET: api/customers
-    [HttpGet]
-    public IEnumerable<Customer> Get()
+    [ApiController]
+    [Route("[controller]")]
+    public class LoginController : ControllerBase
     {
-        return _repo.GetAll();
-    }
-
-
-
-    // GET: api/customers/{id}
-    [HttpGet("{id}")]
-    public ActionResult<Customer> Get(int id)
-    {
-        var customer = _repo.Get(id);
-        if (customer == null)
+        [HttpPost]
+        public IActionResult Login(string username, string password)
         {
-            return NotFound();
+            if (username == "admin" && password == "admin")
+            {
+                return Ok("Login Successful");
+            }
+            else
+            {
+                return Unauthorized("Incorrect username or password");
+            }
         }
-        return Ok(customer);
     }
-
-
-
 }
