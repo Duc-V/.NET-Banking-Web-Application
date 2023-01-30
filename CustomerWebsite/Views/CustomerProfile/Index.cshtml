@@ -1,0 +1,42 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Customer Profile";
+}
+
+<h2>Customer Profile</h2>
+@await Html.PartialAsync("_RenderAlerts", Model)
+@await Html.PartialAsync("_RenderProfilePicture", Model)
+
+<div class="form-group mt-4">
+    <label>Name:</label>
+    <p>@Model.Customer.Name</p>
+</div>
+<div class="form-group">
+    <label>TFN:</label>
+    <p>@Model.Customer.TFN</p>
+</div>
+<div class="form-group">
+    <label>Address:</label>
+    <p>@Model.Customer.Address</p>
+</div>
+<div class="form-group">
+    <label>City:</label>
+    <p>@Model.Customer.City</p>
+</div>
+<div class="form-group">
+    <label>State:</label>
+    <p>@Model.Customer.State</p>
+</div>
+<div class="form-group">
+    <label>PostCode:</label>
+    <p>@Model.Customer.PostCode</p>
+</div>
+<div class="form-group">
+    <label>Mobile:</label>
+    <p>@Model.Customer.Mobile</p>
+</div>
+
+<a asp-action="Edit" class="btn btn-primary">Update Profile</a>
+<br />
+<a asp-action="UpdatePassword" class="btn btn-primary">Update password</a>

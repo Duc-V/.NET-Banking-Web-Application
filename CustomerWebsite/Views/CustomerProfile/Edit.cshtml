@@ -1,0 +1,58 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Customer Profile";
+}
+
+<h2>Customer Profile</h2>
+@await Html.PartialAsync("_RenderAlerts", Model)
+
+<form asp-action="SaveProfile" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Customer.ProfilePicture" class="mt-4"></label>
+        <br />
+        @await Html.PartialAsync("_RenderProfilePicture", Model)
+        <input asp-for="Customer.ProfilePicture" type="file" asp-for="Customer.ProfilePicture" class="form-control mt-4" value="@Model.Customer.Name" />
+    </div>
+
+    <div class="form-group mt-4">
+        <label asp-for="Customer.Name"></label>
+        <input asp-for="Customer.Name" class="form-control" value="@Model.Customer.Name" />
+        <span asp-validation-for="Customer.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.TFN"></label>
+        <input asp-for="Customer.TFN" class="form-control" value="@Model.Customer.TFN" />
+        <span asp-validation-for="Customer.TFN" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.Address"></label>
+        <input asp-for="Customer.Address" class="form-control" value="@Model.Customer.Address" />
+        <span asp-validation-for="Customer.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.City"></label>
+        <input asp-for="Customer.City" class="form-control" value="@Model.Customer.City" />
+        <span asp-validation-for="Customer.City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.State"></label>
+        <input asp-for="Customer.State" class="form-control" value="@Model.Customer.State" />
+        <span asp-validation-for="Customer.State" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.PostCode"></label>
+        <input asp-for="Customer.PostCode" class="form-control" value="@Model.Customer.PostCode" />
+        <span asp-validation-for="Customer.PostCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Customer.Mobile"></label>
+        <input asp-for="Customer.Mobile" class="form-control" value="@Model.Customer.Mobile" />
+        <span asp-validation-for="Customer.Mobile" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+</form>
+
+
+
