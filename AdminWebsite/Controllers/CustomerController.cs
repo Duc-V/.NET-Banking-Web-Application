@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AdminWebsite.Models;
 using Newtonsoft.Json;
 
-namespace MvcMovie.Controllers;
+namespace AdminWebsite.Controllers;
 
 public class CustomersController : Controller
 {
@@ -12,11 +12,11 @@ public class CustomersController : Controller
 
     public CustomersController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
-    // GET: Movies/Index
+    // GET: Customers/Index
     public async Task<IActionResult> Index()
     {
         var response = await Client.GetAsync("api/customers");
-        //var response = await MovieApi.InitializeClient().GetAsync("api/movies");
+
 
         if(!response.IsSuccessStatusCode)
             throw new Exception();
@@ -25,9 +25,9 @@ public class CustomersController : Controller
         var result = await response.Content.ReadAsStringAsync();
 
         // Deserializing the response received from web api and storing into a list.
-        var movies = JsonConvert.DeserializeObject<List<Customer>>(result);
+        var customers = JsonConvert.DeserializeObject<List<Customer>>(result);
 
-        return View(movies);
+        return View(customers);
     }
 
     

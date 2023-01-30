@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Mime;
 
-namespace MvcMovie.Web.Helper;
+namespace AdminWebsite.Web.Helper;
 
 public static class AdminApi
 {
