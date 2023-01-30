@@ -6,11 +6,11 @@ namespace AdminAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CustomerController : ControllerBase
+public class CustomersController : ControllerBase
 {
     private readonly CustomerManager _repo;
 
-    public CustomerController(CustomerManager repo)
+    public CustomersController(CustomerManager repo)
     { 
         _repo = repo; 
     }

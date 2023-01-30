@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAPI", "AdminAPI\AdminA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminWebsite", "AdminWebsite\AdminWebsite.csproj", "{B1138116-CCEE-4002-A3E6-1291C5C5BA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCBA Library", "MCBA Library\MCBA Library.csproj", "{FA58FE11-EB62-42BC-997D-3FBD194A21D5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{B1138116-CCEE-4002-A3E6-1291C5C5BA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1138116-CCEE-4002-A3E6-1291C5C5BA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1138116-CCEE-4002-A3E6-1291C5C5BA14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA58FE11-EB62-42BC-997D-3FBD194A21D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA58FE11-EB62-42BC-997D-3FBD194A21D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA58FE11-EB62-42BC-997D-3FBD194A21D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA58FE11-EB62-42BC-997D-3FBD194A21D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 
 namespace MvcMovie.Controllers;
 
-public class MoviesController : Controller
+public class CustomersController : Controller
 {
     private readonly IHttpClientFactory _clientFactory;
     private HttpClient Client => _clientFactory.CreateClient("api");
 
-    public MoviesController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
+    public CustomersController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
     // GET: Movies/Index
     public async Task<IActionResult> Index()
