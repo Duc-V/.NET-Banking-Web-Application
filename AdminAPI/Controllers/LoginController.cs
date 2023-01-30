@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
+using AdminAPI.Models;
 
 namespace AdminAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Login(string username, string password)
+        public IActionResult Login([FromBody] LoginModel model)
         {
-            if (username == "admin" && password == "admin")
+            if (model.Username == "admin" && model.Password == "admin")
             {
                 return Ok("Login Successful");
             }
@@ -18,5 +19,6 @@ namespace AdminAPI.Controllers
                 return Unauthorized("Incorrect username or password");
             }
         }
+
     }
 }
