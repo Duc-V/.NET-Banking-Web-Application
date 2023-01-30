@@ -10,6 +10,7 @@
             <th>Scheduled Time</th>
             <th>Period</th>
             <th>Status</th>
+            <th>Action</th>
         </tr
         @foreach(var item in Model)
         {
@@ -23,13 +24,17 @@
                 <td>@Html.DisplayFor(x => item.ScheduleTimeUtc)</td>
                 <td>@Html.DisplayFor(x => item.Period)</td>
                 <td>@Html.DisplayFor(x => item.Status)</td>
+                @if ((item.Status != "Complete") && (item.Status != "Not Enough Funds At Scheduled Time") && (item.Status != "Cancelled"))
+                {
+                    <td><a asp-controller="BillPay" asp-action="Cancel" asp-route-id=@item.BillPayID >Cancel</a></td>
+                }
             </tr>
         }
     </table>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="AddNewBillPay" asp-route-id ="@ViewBag.Id">New Bill Pay</a>
+    <a class="btn btn-primary" asp-controller="BillPay" asp-action="Add" asp-route-id ="@ViewBag.Id">New Bill Pay</a>
 </div>
 
 <div>
