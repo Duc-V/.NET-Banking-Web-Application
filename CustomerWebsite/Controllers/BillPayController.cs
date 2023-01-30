@@ -3,6 +3,7 @@ using Assignment2.Filter;
 using Assignment2.Models;
 using Assignment2.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Principal;
 
 namespace Assignment2.Controllers
@@ -22,10 +23,10 @@ namespace Assignment2.Controllers
             return View(_context.BillPay.Where(x => x.AccountNumber == id).OrderByDescending(x => x.ScheduleTimeUtc).ToList());
         }
 
-        public IActionResult AddNewBillPay() => View();
+        public IActionResult Add() => View();
 
         [HttpPost]
-        public async Task<IActionResult> AddNewBillPay(TransactionViewModel Bpay)
+        public async Task<IActionResult> Add(TransactionViewModel Bpay)
         {
             ModelState.Clear();
 
@@ -53,6 +54,15 @@ namespace Assignment2.Controllers
             return RedirectToAction("ConfirmTransaction", "Transaction", Bpay);
 
 
+        }
+
+        public async Task<IActionResult> Cancel(int id) => View(await _context.BillPay.FindAsync(id));
+
+        public async Task<IActionResult> ConfirmCancel(int id)
+        {
+            var BillPay = _context.BillPay.Remove(await _context.BillPay.FindAsync(id));
+            _context.SaveChanges();
+            return RedirectToAction("Index", "BillPay", new { id = AccountNumber });
         }
 
     }

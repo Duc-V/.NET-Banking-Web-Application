@@ -72,7 +72,6 @@ public static class SeedData
                     });
                     foreach (var Payee in Payees)
                     {
-                        Console.WriteLine(Payee.Name);
                         context.Payee.Add(Payee);
                         foreach (var billPay in Payee.BillPay)
                         {
