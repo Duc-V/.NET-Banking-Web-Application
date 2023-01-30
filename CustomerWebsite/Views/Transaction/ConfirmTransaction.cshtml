@@ -2,20 +2,29 @@
 @{
     ViewData["Title"] = "Widthdraw";
 }
-<h1 class="display-5">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+<h3 class="display-6">Account Number @Model.AccountNumber (@Model.AccountType)</h3>
+
 @if (Model.TransactionType == "BillPay")
 {
-    <h3 class="display-6">Payee ID : $@Model.DestinationAccountNumber </h3>
+    <h3 class="display-6">Payee ID : @Model.DestinationAccountNumber </h3>
     <h3 class="display-6">Amount : $@Model.Amount </h3>
     <h3 class="display-6">Time: @Model.DateTime </h3>
     <h3 class="display-6">Period : @Model.Period </h3>
-}else{
-    
-    <h3 class="display-6">Amount : $@Model.Amount </h3>
 }
-@if (Model.TransactionType == "Deposit")
+else if (Model.TransactionType == "Transfer")
 {
+    <h3 class="display-6">Payee ID : @Model.DestinationAccountNumber </h3>
+    <h3 class="display-6">Amount : $@Model.Amount </h3>
     <h3 class="display-6">Comment : @Model.Comment </h3>
+}
+else if (Model.TransactionType == "Deposit")
+{
+    <h3 class="display-6">Amount : $@Model.Amount </h3>
+    <h3 class="display-6">Comment : @Model.Comment </h3>
+}
+else
+{
+    <h3 class="display-6">Amount : $@Model.Amount </h3>
 }
 <h3 class="navbar-text">Confirm your @Model.TransactionType</h3>
 

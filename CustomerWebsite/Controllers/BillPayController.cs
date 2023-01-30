@@ -27,7 +27,7 @@ namespace Assignment2.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewBillPay(TransactionViewModel Bpay)
         {
-            Console.WriteLine($"{Bpay.DateTime}##########################");
+            ModelState.Clear();
 
 
             var account = await _context.Accounts.FindAsync(AccountNumber);
