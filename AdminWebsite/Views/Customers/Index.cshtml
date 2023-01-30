@@ -16,6 +16,7 @@
             <th>State</th>
             <th>PostCode</th>
             <th>Mobile</th>
+            <th>Edit</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
                 <td>@customer.State</td>
                 <td>@customer.PostCode</td>
                 <td>@customer.Mobile</td>
+                <td <a asp-action="Edit" asp-route-id="@customer.Id">Edit</a> </td>
             </tr>
         }
     </tbody>
