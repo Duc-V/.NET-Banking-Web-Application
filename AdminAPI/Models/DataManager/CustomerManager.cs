@@ -60,6 +60,7 @@ public IEnumerable<Customer> GetAll()
             customerToUpdate.TFN = customer.TFN;
             customerToUpdate.Address = customer.Address;
             customerToUpdate.City = customer.City;
+            customerToUpdate.State = customer.State;
             customerToUpdate.PostCode = customer.PostCode;
             customerToUpdate.Mobile = customer.Mobile;
 
