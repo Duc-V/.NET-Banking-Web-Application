@@ -24,7 +24,8 @@ public IEnumerable<Customer> GetAll()
             TFN = c.TFN ?? "null",
             Address = c.Address ?? "null",
             City= c.City ?? "null",
-            PostCode= c.PostCode ?? "null",
+            State = c.State ?? "null",
+            PostCode = c.PostCode ?? "null",
             Mobile = c.Mobile ?? "null"
         })
         .ToList();
@@ -41,6 +42,7 @@ public IEnumerable<Customer> GetAll()
                 TFN = c.TFN ?? "null",
                 Address = c.Address ?? "null",
                 City = c.City ?? "null",
+                State = c.State ?? "null",
                 PostCode = c.PostCode ?? "null",
                 Mobile = c.Mobile ?? "null"
 
@@ -49,24 +51,13 @@ public IEnumerable<Customer> GetAll()
 
         return customer;
     }
-   
+
     public void UpdateCustomer(Customer customer, int id)
     {
-        var customerToUpdate = _context.Customers.FirstOrDefault(c => c.CustomerID == id);
-
-        if (customerToUpdate != null)
-        {
-            customerToUpdate.Name = customer.Name;
-            customerToUpdate.TFN = customer.TFN;
-            customerToUpdate.Address = customer.Address;
-            customerToUpdate.City = customer.City;
-            customerToUpdate.State = customer.State;
-            customerToUpdate.PostCode = customer.PostCode;
-            customerToUpdate.Mobile = customer.Mobile;
-
-            _context.SaveChanges();
-        }
+        _context.Customers.Update(customer);
+        _context.SaveChanges();
     }
+
 
 
 }

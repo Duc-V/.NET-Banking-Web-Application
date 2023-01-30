@@ -31,7 +31,35 @@ public class CustomersController : Controller
         return View(customers);
     }
 
+    // GET: Customers/Update/{id}
+    public async Task<IActionResult> Update(int id)
+    {
+        var response = await Client.GetAsync($"api/Customers/{id}");
 
+        if (!response.IsSuccessStatusCode)
+            throw new Exception();
+
+        var result = await response.Content.ReadAsStringAsync();
+
+        var customer = JsonConvert.DeserializeObject<Customer>(result);
+
+        return View(customer);
+    }
+
+
+    // POST: Customers/Update/{id}
+    [HttpPut]
+    public async Task<IActionResult> Update(int id, UpdateCustomerRequest request)
+    {
+        var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+        var response = await Client.PutAsync($"api/Customers/{id}", content);
+
+        if (!response.IsSuccessStatusCode)
+            throw new Exception();
+
+        return RedirectToAction("Index");
+    }
 
 
 }

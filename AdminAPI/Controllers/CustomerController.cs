@@ -38,11 +38,29 @@ public class CustomersController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public IActionResult UpdateCustomer(int id, [FromBody] Customer customer)
+    public IActionResult UpdateCustomer(int id, [FromBody] UpdateCustomerRequest request)
     {
+        var customer = _repo.Get(id);
+        if (customer == null)
+        {
+            return NotFound();
+        }
+
+        customer.Name = request.Name;
+        customer.TFN = request.TFN;
+        customer.Address = request.Address;
+        customer.City = request.City;
+        customer.State = request.State;
+        customer.PostCode = request.PostCode;
+        customer.Mobile = request.Mobile;
+
         _repo.UpdateCustomer(customer, id);
+
         return NoContent();
     }
+
+
+
 
 
 
