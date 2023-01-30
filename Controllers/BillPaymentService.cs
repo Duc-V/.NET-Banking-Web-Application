@@ -44,9 +44,10 @@ public class BillPaymentService : BackgroundService
 
         foreach(var BillPay in list)
         {
-
-            int TimeDifference = (DateTime.UtcNow - BillPay.ScheduleTimeUtc).Minutes;
-
+            // check the time difference between billpay time and current time in minutes 
+            int TimeDifference = Convert.ToInt32((DateTime.UtcNow - BillPay.ScheduleTimeUtc).TotalMinutes);
+            Console.WriteLine("##########################");
+            Console.WriteLine(TimeDifference);
             // if the time difference between time now and Schedule time is within +-3 minutes OR transactions not executed in the past, execute
             if ((Enumerable.Range(-3, 3).Contains(TimeDifference)) || (BillPay.ScheduleTimeUtc < DateTime.UtcNow))
 
