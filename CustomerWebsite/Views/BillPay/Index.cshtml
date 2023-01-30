@@ -8,6 +8,7 @@
             <th>PayeeID</th>
             <th>Amount($)</th>
             <th>Scheduled Time</th>
+            <th>Period</th>
             <th>Status</th>
         </tr
         @foreach(var item in Model)
@@ -20,6 +21,7 @@
                 <td>@Html.DisplayFor(x => item.PayeeID)</td>
                 <td>@Html.DisplayFor(x => item.Amount)</td>
                 <td>@Html.DisplayFor(x => item.ScheduleTimeUtc)</td>
+                <td>@Html.DisplayFor(x => item.Period)</td>
                 <td>@Html.DisplayFor(x => item.Status)</td>
             </tr>
         }

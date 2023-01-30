@@ -46,7 +46,7 @@
         "AccountNumber": 4101,
         "Amount": 111.00,
         "ScheduleTimeUtc": "02/08/2023 08:30:00 PM",
-        "Period": "Monthly"
+        "Period": "One-Off"
       }
     ]
   }
