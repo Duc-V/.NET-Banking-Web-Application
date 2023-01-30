@@ -27,5 +27,8 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="SimpleHashing.Net" Version="2.1.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Views\Login\" />
+	</ItemGroup>
 
 </Project>

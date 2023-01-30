@@ -54,5 +54,6 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseSession();
 app.MapDefaultControllerRoute();
+app.MapControllerRoute("default", "{controller=Home}/{action=Login}");
 
 app.Run();
