@@ -30,7 +30,7 @@
                 <td>@customer.State</td>
                 <td>@customer.PostCode</td>
                 <td>@customer.Mobile</td>
-                <td>@(customer.IsLocked ? "Locked" : "Unlocked")</td>
+                <td>@(customer.IsLocked)</td>
                 <td>
                     @if (customer.IsLocked)
                     {
@@ -38,9 +38,9 @@
                     }
                     else
                     {
-                        <a asp-controller="Customer" asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
+                        <a asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
                     }
-                    |
+ 
                     <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
                 </td>
             </tr>
