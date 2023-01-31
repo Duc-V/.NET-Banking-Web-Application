@@ -72,4 +72,37 @@ public class CustomersController : Controller
         return View(customer);
     }
 
+
+
+    [HttpGet]
+    public async Task<IActionResult> Lock(int id)
+    {
+        Console.WriteLine("1");
+        var response = await Client.PutAsync($"api/Customers/{id}/Lock", null);
+        Console.WriteLine(response);
+        if (!response.IsSuccessStatusCode)
+        {
+            // Log the error message for debugging purposes
+            Console.WriteLine("Error: " + response.StatusCode);
+            throw new Exception();
+        }
+        Console.WriteLine("2");
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Unlock(int id)
+    {
+        var response = await Client.PutAsync($"api/Customers/{id}/Unlock", null);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            // Log the error message for debugging purposes
+            Console.WriteLine("Error: " + response.StatusCode);
+            throw new Exception();
+        }
+
+        return RedirectToAction("Index");
+    }
+
 }

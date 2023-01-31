@@ -42,6 +42,24 @@ public class CustomersController : ControllerBase
 
 
 
+    // PUT api/customers/{id}/lock
+    [HttpPut("{id}/lock")]
+    public void Lock(int id)
+    {
+        Console.WriteLine(id);
+        _repo.Lock(id);
+    }
+
+    // PUT api/customers/{id}/unlock
+    [HttpPut("{id}/unlock")]
+    public void Unlock(int id)
+    {
+        _repo.Unlock(id);
+    }
+
+
+
+
 
 
 
