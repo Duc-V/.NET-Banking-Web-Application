@@ -47,6 +47,7 @@ public class CustomersController : ControllerBase
     [HttpPut("{id}/lock")]
     public void Lock(int id)
     {
+        Console.WriteLine(id);
         _repo.Lock(id);
     }
 
