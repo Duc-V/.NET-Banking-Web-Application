@@ -16,39 +16,12 @@ public class CustomerManager : ICustomerRepository
 
 public IEnumerable<Customer> GetAll()
 {
-    return _context.Customers
-        .Select(c => new Customer
-        {
-            CustomerID = c.CustomerID,
-            Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
-            TFN = c.TFN ?? "null",
-            Address = c.Address ?? "null",
-            City= c.City ?? "null",
-            State = c.State ?? "null",
-            PostCode = c.PostCode ?? "null",
-            Mobile = c.Mobile ?? "null"
-        })
-        .ToList();
+    return _context.Customers.ToList();
 }
 
     public Customer Get(int id)
     {
-        var customer = _context.Customers
-            .Where(c => c.CustomerID == id)
-            .Select(c => new Customer
-            {
-                CustomerID = c.CustomerID,
-                Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
-                TFN = c.TFN ?? "null",
-                Address = c.Address ?? "null",
-                City = c.City ?? "null",
-                State = c.State ?? "null",
-                PostCode = c.PostCode ?? "null",
-                Mobile = c.Mobile ?? "null"
-
-            })
-            .FirstOrDefault();
-
+        var customer = _context.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
         return customer;
     }
     public int Update(int id, Customer customer)
