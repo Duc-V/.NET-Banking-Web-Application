@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Customer>
 
 @{
-    ViewData["Title"] = "Customers";
+ViewData["Title"] = "Customers";
 }
 
 <h1>Customers</h1>
@@ -30,7 +30,7 @@
                 <td>@customer.State</td>
                 <td>@customer.PostCode</td>
                 <td>@customer.Mobile</td>
-                <td>@(customer.IsLocked)</td>
+                <td>@(customer.IsLocked ? "Locked" : "Unlocked")</td>
                 <td>
                     @if (customer.IsLocked)
                     {
@@ -40,7 +40,6 @@
                     {
                         <a asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
                     }
- 
                     <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
                 </td>
             </tr>
