@@ -50,4 +50,11 @@ public class HomeController : Controller
 
         return RedirectToAction("Index", "Customer");
     }
+
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index");
+    }
 }
