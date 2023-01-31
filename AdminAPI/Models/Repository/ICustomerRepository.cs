@@ -9,7 +9,7 @@ public interface ICustomerRepository
     Customer Get(int id);
 
     // take in id and update respective customer.
-    void UpdateCustomer(Customer customer, int id);
+    int Update(int id, Customer customer);
 
 }
 

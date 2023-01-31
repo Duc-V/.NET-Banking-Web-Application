@@ -32,8 +32,11 @@ public class CustomersController : Controller
     }
 
     // GET: Customers/Update/{id}
-    public async Task<IActionResult> Update(int id)
+    public async Task<IActionResult> Edit(int? id)
     {
+        if (id == null)
+            return NotFound();
+
         var response = await Client.GetAsync($"api/Customers/{id}");
 
         if (!response.IsSuccessStatusCode)
@@ -48,18 +51,25 @@ public class CustomersController : Controller
 
 
     // POST: Customers/Update/{id}
-    [HttpPut]
-    public async Task<IActionResult> Update(int id, UpdateCustomerRequest request)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, Customer customer)
     {
-        var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+        if (id != customer.CustomerID)
+            return NotFound();
 
-        var response = await Client.PutAsync($"api/Customers/{id}", content);
+        if (ModelState.IsValid)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
 
-        if (!response.IsSuccessStatusCode)
-            throw new Exception();
+            var response = Client.PutAsync("api/customers", content).Result;
 
-        return RedirectToAction("Index");
+
+            if (response.IsSuccessStatusCode)
+                return RedirectToAction("Index");
+        }
+
+        return View(customer);
     }
-
 
 }
