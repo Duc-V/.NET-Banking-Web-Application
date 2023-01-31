@@ -40,7 +40,7 @@ public class HomeController : Controller
         var customer = await _context.Customers.FindAsync(login.CustomerID);
         if (customer.IsLocked)
         {
-            ModelState.AddModelError("AccountLocked", "Your account is locked. Please contact the administrator.");
+            ModelState.AddModelError("LoginFailed", "Your account is locked. Please contact the administrator.");
             return View(new Login { LoginID = loginID });
         }
 
