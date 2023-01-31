@@ -77,11 +77,12 @@ public class CustomersController : Controller
     [HttpPost]
     public async Task<IActionResult> Lock(int id)
     {
+        Console.WriteLine("1");
         var response = await Client.PostAsync($"api/Customers/{id}/Lock", null);
         Console.WriteLine(response);
         if (!response.IsSuccessStatusCode)
             throw new Exception();
-
+        Console.WriteLine("2");
         return RedirectToAction("Index");
     }
 

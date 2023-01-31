@@ -38,7 +38,7 @@
                     }
                     else
                     {
-                        <a asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
+                        <a asp-controller="Customer" asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
                     }
                     |
                     <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
