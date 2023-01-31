@@ -51,11 +51,12 @@ public IEnumerable<Customer> GetAll()
 
         return customer;
     }
-
-    public void UpdateCustomer(Customer customer, int id)
+    public int Update(int id, Customer customer)
     {
-        _context.Customers.Update(customer);
+        _context.Update(customer);
         _context.SaveChanges();
+
+        return id;
     }
 
 

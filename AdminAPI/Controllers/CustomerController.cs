@@ -28,35 +28,15 @@ public class CustomersController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<Customer> Get(int id)
     {
-        var customer = _repo.Get(id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-        return Ok(customer);
+        return _repo.Get(id);
     }
 
 
-    [HttpPut("{id}")]
-    public IActionResult UpdateCustomer(int id, [FromBody] UpdateCustomerRequest request)
+    // PUT api/movies
+    [HttpPut]
+    public void Put([FromBody] Customer customer)
     {
-        var customer = _repo.Get(id);
-        if (customer == null)
-        {
-            return NotFound();
-        }
-
-        customer.Name = request.Name;
-        customer.TFN = request.TFN;
-        customer.Address = request.Address;
-        customer.City = request.City;
-        customer.State = request.State;
-        customer.PostCode = request.PostCode;
-        customer.Mobile = request.Mobile;
-
-        _repo.UpdateCustomer(customer, id);
-
-        return NoContent();
+        _repo.Update(customer.CustomerID, customer);
     }
 
 
