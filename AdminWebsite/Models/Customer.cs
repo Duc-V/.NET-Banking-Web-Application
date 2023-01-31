@@ -30,6 +30,6 @@ public class Customer
     [StringLength(12)]
     public string Mobile { get; set; }
 
-
+    public bool IsLocked { get; set; }
 }
 

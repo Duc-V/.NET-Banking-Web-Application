@@ -72,4 +72,29 @@ public class CustomersController : Controller
         return View(customer);
     }
 
+
+
+    [HttpPost]
+    public async Task<IActionResult> Lock(int id)
+    {
+        var response = await Client.PostAsync($"api/Customers/{id}/Lock", null);
+        Console.WriteLine(response);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception();
+
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Unlock(int id)
+    {
+        var response = await Client.PostAsync($"api/Customers/{id}/Unlock", null);
+
+        if (!response.IsSuccessStatusCode)
+            throw new Exception();
+
+        return RedirectToAction("Index");
+    }
+
+
 }

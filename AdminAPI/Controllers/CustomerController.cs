@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AdminAPI.Models;
 using AdminAPI.Models.DataManager;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminAPI.Controllers;
 
@@ -40,6 +41,21 @@ public class CustomersController : ControllerBase
     }
 
 
+
+
+    // PUT api/customers/{id}/lock
+    [HttpPut("{id}/lock")]
+    public void Lock(int id)
+    {
+        _repo.Lock(id);
+    }
+
+    // PUT api/customers/{id}/unlock
+    [HttpPut("{id}/unlock")]
+    public void Unlock(int id)
+    {
+        _repo.Unlock(id);
+    }
 
 
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerWebsite.Migrations
 {
     [DbContext(typeof(McbaContext))]
-    [Migration("20230130035422_init")]
+    [Migration("20230131094858_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -99,6 +99,9 @@ namespace CustomerWebsite.Migrations
                     b.Property<string>("City")
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Mobile")
                         .HasMaxLength(12)

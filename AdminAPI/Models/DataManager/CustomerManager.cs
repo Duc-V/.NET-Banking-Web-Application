@@ -60,5 +60,27 @@ public IEnumerable<Customer> GetAll()
     }
 
 
+    public void Lock(int id)
+    {
+        var customer = _context.Customers.Find(id);
+        if (customer != null)
+        {
+            customer.IsLocked = true;
+            _context.SaveChanges();
+        }
+    }
+
+
+    public void Unlock(int id)
+    {
+        var customer = _context.Customers.Find(id);
+        if (customer != null)
+        {
+            customer.IsLocked = false;
+            _context.SaveChanges();
+        }
+    }
+
+
 
 }

@@ -97,6 +97,9 @@ namespace CustomerWebsite.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Mobile")
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
