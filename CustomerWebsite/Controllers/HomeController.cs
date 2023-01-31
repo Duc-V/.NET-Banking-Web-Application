@@ -36,6 +36,13 @@ public class HomeController : Controller
             ModelState.AddModelError("LoginFailed", "Login failed, please try again. (Password is case sensitive)");
             return View(new Login { LoginID = loginID });
         }
+        // check if customer has a locked account
+        var customer = await _context.Customers.FindAsync(login.CustomerID);
+        if (customer.IsLocked)
+        {
+            ModelState.AddModelError("LoginFailed", "Your account is locked. Please contact the administrator.");
+            return View(new Login { LoginID = loginID });
+        }
 
         // Login customer.
         HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
