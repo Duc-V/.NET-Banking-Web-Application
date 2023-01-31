@@ -36,4 +36,3 @@ public class Customer
     public virtual List<Account> Accounts { get; set; }
     public virtual Login Login { get; set; }
 }
-

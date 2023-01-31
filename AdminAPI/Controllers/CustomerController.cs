@@ -12,8 +12,8 @@ public class CustomersController : ControllerBase
     private readonly CustomerManager _repo;
 
     public CustomersController(CustomerManager repo)
-    { 
-        _repo = repo; 
+    {
+        _repo = repo;
     }
 
     // GET: api/customers
