@@ -14,10 +14,10 @@ public class CustomerManager : ICustomerRepository
     }
 
 
-    public IEnumerable<Customer> GetAll()
-    {
-        return _context.Customers.ToList();
-    }
+public IEnumerable<Customer> GetAll()
+{
+    return _context.Customers.ToList();
+}
 
     public Customer Get(int id)
     {
@@ -60,5 +60,7 @@ public class CustomerManager : ICustomerRepository
             _context.SaveChanges();
         }
     }
+
+
 
 }

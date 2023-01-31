@@ -31,7 +31,5 @@ public class Customer
     public string Mobile { get; set; }
 
     public bool IsLocked { get; set; }
-
-
 }
 

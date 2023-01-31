@@ -20,7 +20,6 @@ public class Customer
     [StringLength(40)]
     public string City { get; set; }
 
-
     [StringLength(3), RegularExpression("^(VIC|NSW|TAS|QLD|SA|WA)$", ErrorMessage = "Invalid state code, Must be of the following: VIC | NSW | TAS | QLD | SA | WA ")]
     public string State { get; set; }
 
@@ -29,6 +28,7 @@ public class Customer
 
     [StringLength(12), RegularExpression("^0[4][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]$", ErrorMessage = "Invalid mobile number format, Must be of the format: 04XX XXX XXX ")]
     public string Mobile { get; set; }
+
 
     public bool IsLocked { get; set; }
 

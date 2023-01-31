@@ -23,6 +23,7 @@ namespace CustomerWebsite.Migrations
                     State = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
                     PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true),
+                    IsLocked = table.Column<bool>(type: "bit", nullable: false),
                     ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
