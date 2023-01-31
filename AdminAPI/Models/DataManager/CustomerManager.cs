@@ -35,18 +35,6 @@ public IEnumerable<Customer> GetAll()
     {
         var customer = _context.Customers
             .Where(c => c.CustomerID == id)
-            .Select(c => new Customer
-            {
-                CustomerID = c.CustomerID,
-                Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
-                TFN = c.TFN ?? "null",
-                Address = c.Address ?? "null",
-                City = c.City ?? "null",
-                State = c.State ?? "null",
-                PostCode = c.PostCode ?? "null",
-                Mobile = c.Mobile ?? "null"
-
-            })
             .FirstOrDefault();
 
         return customer;
@@ -63,11 +51,10 @@ public IEnumerable<Customer> GetAll()
     public void Lock(int id)
     {
 
-        var customer = _context.Customers.Find(2100);
+        var customer = _context.Customers.Find(id);
         Console.WriteLine(customer.IsLocked);
         if (customer != null)
         {
-            Console.Write("----2-------");
             customer.IsLocked = true;
             _context.SaveChanges();
         }
@@ -78,19 +65,6 @@ public IEnumerable<Customer> GetAll()
     {
         var customer = _context.Customers
                 .Where(c => c.CustomerID == id)
-                .Select(c => new Customer
-                {
-                    CustomerID = c.CustomerID,
-                    Name = string.IsNullOrEmpty(c.Name) ? "null" : c.Name,
-                    TFN = c.TFN ?? "null",
-                    Address = c.Address ?? "null",
-                    City = c.City ?? "null",
-                    State = c.State ?? "null",
-                    PostCode = c.PostCode ?? "null",
-                    Mobile = c.Mobile ?? "null",
-                    IsLocked = c.IsLocked
-
-                })
                 .FirstOrDefault();
         if (customer != null)
         {
