@@ -17,9 +17,19 @@
                 <tr>
                     <td>@account.AccountNumber</td>
                     <td>@account.AccountType</td>
-                    <td>@account.Balance</td>
+                <td>@string.Format("${0:0.00}", account.Balance)</td>
                 <td> <a class="btn btn-primary" asp-controller="BillPay" asp-action="Edit" asp-route-id="@account.AccountNumber">Select</a></td>
                 </tr>
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-controller="Customers" asp-action="Index">Back to Customer List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
