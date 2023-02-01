@@ -40,7 +40,7 @@ public class BillPaymentService : BackgroundService
         var context = scope.ServiceProvider.GetRequiredService<McbaContext>();
 
         var BillPaymetList = await context.BillPay.ToListAsync(cancellationToken);
-        var list = BillPaymetList.Where(x => (x.Status != "Complete") && (x.Status != "Not Enough Funds At Scheduled Time") && (x.Status != "Cancelled")).OrderByDescending(x => x.ScheduleTimeUtc);
+        var list = BillPaymetList.Where(x => (x.Status != "Complete") && (x.Status != "Not Enough Funds At Scheduled Time") && (x.Status != "Cancelled") && (x.Status != "Blocked")).OrderByDescending(x => x.ScheduleTimeUtc);
 
         foreach(var BillPay in list)
         {
