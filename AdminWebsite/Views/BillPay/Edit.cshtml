@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AdminWebsite.Models.BillPay>
+
+<table>
+    <thead>
+        <tr>
+            <th>BillPay ID</th>
+            <th>Account Number</th>
+            <th>Payee ID</th>
+            <th>Amount</th>
+            <th>Schedule Time (UTC)</th>
+            <th>Period</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var billPay in Model)
+        {
+            <tr>
+                <td>@billPay.BillPayID</td>
+                <td>@billPay.AccountNumber</td>
+                <td>@billPay.PayeeID</td>
+                <td>@billPay.Amount</td>
+                <td>@billPay.ScheduleTimeUtc</td>
+                <td>@billPay.Period</td>
+                <td>@billPay.Status</td>
+                <td>
+                    @if (billPay.Status == "Active")
+                    {
+                        <a asp-action="Block" asp-route-id="@billPay.BillPayID">Block</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Unblock" asp-route-id="@billPay.BillPayID">Unblock</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

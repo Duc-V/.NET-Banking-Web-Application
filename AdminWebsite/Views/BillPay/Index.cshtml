@@ -1,1 +1,25 @@
-﻿
+﻿@model List<Account>
+
+<h2>Select Account:</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+            <th>BillPay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model)
+        {
+                <tr>
+                    <td>@account.AccountNumber</td>
+                    <td>@account.AccountType</td>
+                    <td>@account.Balance</td>
+                <td> <a class="btn btn-primary" asp-controller="BillPay" asp-action="Edit" asp-route-id="@account.AccountNumber">Select</a></td>
+                </tr>
+        }
+    </tbody>
+</table>
