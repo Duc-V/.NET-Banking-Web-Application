@@ -42,5 +42,35 @@ namespace AdminWebsite.Controllers
 
 
 
+
+        [HttpGet]
+        public async Task<IActionResult> Block(int id, int accountid)
+        {
+            var response = await Client.PutAsync($"api/billpay/{id}/block", null);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Log the error message for debugging purposes
+                Console.WriteLine("Error: " + response.StatusCode);
+                throw new Exception();
+            };
+            return RedirectToAction("Edit", new {id = accountid });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Unblock(int id, int accountid)
+        {
+            var response = await Client.PutAsync($"/api/billpay/{id}/unblock", null);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // Log the error message for debugging purposes
+                Console.WriteLine("Error: " + response.StatusCode);
+                throw new Exception();
+            }
+
+            return RedirectToAction("Edit", new { id = accountid });
+        }
+
+
     }
 }

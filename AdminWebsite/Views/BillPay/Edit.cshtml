@@ -30,11 +30,11 @@
                 <td>
                     @if (string.IsNullOrEmpty(billPay.Status))
                     {
-                    <a asp-action="Block" asp-route-id="@billPay.BillPayID">Block</a>
+                    <a asp-action="Block" asp-route-id="@billPay.BillPayID" asp-route-accountId="@Model.FirstOrDefault().AccountNumber">Block</a>
                     }
                     else
                     {
-                    <a asp-action="Unblock" asp-route-id="@billPay.BillPayID">Unblock</a>
+                    <a asp-action="Unblock" asp-route-id="@billPay.BillPayID" asp-route-accountId="@Model.FirstOrDefault().AccountNumber">Unblock</a>
                     }
                 </td>
             </tr>

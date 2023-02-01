@@ -34,9 +34,7 @@ public class BillPayController : ControllerBase
 
 
 
-    // change billpay status blocked / unblocked
-
-
+    // change billpay status blocked / unblocked using billpay id
     [HttpPut("{id}/block")]
     public void Block(int id)
     {

@@ -32,7 +32,7 @@ public class BillPayManager : IBillRepository
         var billPay = _context.BillPay.Find(id);
         if (billPay != null)
         {
-            billPay.Status = billPay.Status == "blocked" ? billPay.Status : "blocked";
+            billPay.Status = billPay.Status == "Blocked" ? billPay.Status : "Blocked";
             _context.SaveChanges();
         }
     }
