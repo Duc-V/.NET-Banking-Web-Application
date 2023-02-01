@@ -11,6 +11,10 @@ public interface ICustomerRepository
     // take in id and update respective customer.
     int Update(int id, Customer customer);
 
+    // lock customer
+    void Lock(int id);
+    // unlock customer
+    void Unlock(int id);
 }
 
 
