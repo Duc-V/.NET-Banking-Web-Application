@@ -289,7 +289,9 @@ public class TransactionController : Controller
             .CountAsync(x => x.AccountNumber == accountNumber && x.TransactionType == "T" && x.DestinationAccountNumber != null);
 
         // Return true if there are any more than 2 withdrawals or transfers for the specified account number
-        return withdrawalCount + transferCount > 2;
+        Console.WriteLine("####################################");
+        Console.WriteLine(withdrawalCount + transferCount);
+        return (withdrawalCount + transferCount) >= 2;
     }
 
 
