@@ -11,7 +11,7 @@ public class Customer
     [Required, StringLength(50)]
     public string Name { get; set; }
 
-    [StringLength(11), RegularExpression("^[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]$", ErrorMessage = "Invalid TFN format, Must be of the format:XXX XXX XXX")]
+    [StringLength(11), RegularExpression("^[0-9][0-9][0-9] [0-9][0-9][0-9] [0-9][0-9][0-9]$", ErrorMessage = "Invalid TFN format, Must be of the format: XXX XXX XXX")]
     public string TFN { get; set; }
 
     [StringLength(50)]
