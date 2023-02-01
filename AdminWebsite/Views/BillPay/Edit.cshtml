@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<AdminWebsite.Models.BillPay>
 
-<table>
+
+<table class="table">
     <thead>
         <tr>
-            <th>BillPay ID</th>
+            <th>ID</th>
             <th>Account Number</th>
             <th>Payee ID</th>
             <th>Amount</th>
@@ -23,15 +24,17 @@
                 <td>@billPay.Amount</td>
                 <td>@billPay.ScheduleTimeUtc</td>
                 <td>@billPay.Period</td>
-                <td>@billPay.Status</td>
                 <td>
-                    @if (billPay.Status == "Active")
+                    @(string.IsNullOrEmpty(billPay.Status) ? "Active" : billPay.Status)
+                </td>
+                <td>
+                    @if (string.IsNullOrEmpty(billPay.Status))
                     {
-                        <a asp-action="Block" asp-route-id="@billPay.BillPayID">Block</a>
+                    <a asp-action="Block" asp-route-id="@billPay.BillPayID">Block</a>
                     }
                     else
                     {
-                        <a asp-action="Unblock" asp-route-id="@billPay.BillPayID">Unblock</a>
+                    <a asp-action="Unblock" asp-route-id="@billPay.BillPayID">Unblock</a>
                     }
                 </td>
             </tr>
