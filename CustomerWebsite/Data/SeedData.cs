@@ -31,6 +31,7 @@ public static class SeedData
         {
             foreach (var Customer in Customers)
             {
+                Customer.IsLocked= false;
                 //Add customer
                 context.Customers.Add(Customer);
                 foreach (var account in Customer.Accounts)

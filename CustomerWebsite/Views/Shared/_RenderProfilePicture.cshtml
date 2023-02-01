@@ -2,22 +2,23 @@
 
 @{
     var img = String.Empty;
-    if (Model.Customer.ProfilePicture is null)
+    if (Model.Customer != null && Model.Customer.ProfilePicture is null)
     {
         img = "https://api.dicebear.com/5.x/bottts-neutral/svg?seed=" + Model.Customer.CustomerID;
     }
-    else
+    else if (Model.Customer != null)
     {
         img = "data:image/jpg;base64, " + Convert.ToBase64String(Model.Customer.ProfilePicture);
     }
 }
 
-@if ((string) ViewData["size"] == "icon")
+@if ((string)ViewData["size"] == "icon")
 {
     @*Icon size*@
     <img src="@img"
      class="img-fluid rounded mt-2" style="margin-right: 10px; width: 30px; height: 30px; object-fit: cover;">
-} else
+}
+else
 {
     @*Full size*@
     <img src="@img"
