@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using AdminWebsite.Models;
+using AdminWebsite.Filter;
 
 namespace AdminWebsite.Controllers;
-
+//[AuthorizeAdmin]
 public class HomeController : Controller
 {
     // ReSharper disable once NotAccessedField.Local

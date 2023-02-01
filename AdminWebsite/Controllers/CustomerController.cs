@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using AdminWebsite.Models;
 using Newtonsoft.Json;
+using AdminWebsite.Filter;
 
 namespace AdminWebsite.Controllers;
+
+//[AuthorizeAdmin]
 
 public class CustomersController : Controller
 {

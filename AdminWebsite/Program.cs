@@ -14,6 +14,13 @@ builder.Services.AddHttpClient("api", client =>
 });
 
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    // Make the session cookie essential.
+    options.Cookie.IsEssential = true;
+});
+
 
 builder.Services.AddControllersWithViews();
 
@@ -27,6 +34,7 @@ if(!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapDefaultControllerRoute();
 
