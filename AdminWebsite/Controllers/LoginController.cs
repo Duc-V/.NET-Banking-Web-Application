@@ -12,12 +12,12 @@ namespace AdminWebsite.Controllers
         {
             if (loginID != "admin" || password != "admin")
             {
-                return View("Login/Index");
+                return View("Index");
             }
 
             // Login customer.
             HttpContext.Session.SetString("id", "admin");
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Logout()

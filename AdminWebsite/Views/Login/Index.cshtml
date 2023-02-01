@@ -15,7 +15,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Home" asp-controller="Login" asp-action="Login" method="POST">
+        <form asp-controller="Login" asp-action="Login" method="POST">
             <div class="form-group">
                 <label asp-for="LoginID" class="control-label"></label>
                 <input asp-for="LoginID" class="form-control" />
@@ -30,6 +30,7 @@
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />
             </div>
+            
             @Html.ValidationMessage("LoginFailed", new { @class = "text-danger" })
         </form>
     </div>

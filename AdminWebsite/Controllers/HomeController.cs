@@ -4,7 +4,7 @@ using AdminWebsite.Models;
 using AdminWebsite.Filter;
 
 namespace AdminWebsite.Controllers;
-//[AuthorizeAdmin]
+[AuthorizeAdmin]
 public class HomeController : Controller
 {
     // ReSharper disable once NotAccessedField.Local
@@ -17,7 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return RedirectToAction("Index", "Login");
+        return RedirectToAction("Index", "Customers");
     }
 
     public IActionResult Privacy()

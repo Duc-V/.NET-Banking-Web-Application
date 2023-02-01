@@ -6,7 +6,7 @@ using AdminWebsite.Filter;
 
 namespace AdminWebsite.Controllers;
 
-//[AuthorizeAdmin]
+[AuthorizeAdmin]
 
 public class CustomersController : Controller
 {
