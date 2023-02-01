@@ -23,8 +23,8 @@ public class BillPayController : ControllerBase
         return _repo.GetAccounts(id);
     }
 
-
-    // once account is selected get all bill pay transactions using account number
+    
+    // once account is selected get all bill pay transactions using account number - works!
     [HttpGet("{accountNumber}/transactions")]
     public IEnumerable<BillPay> GetBillPayTransactions(int accountNumber)
     {
