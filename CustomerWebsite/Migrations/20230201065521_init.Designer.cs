@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerWebsite.Migrations
 {
     [DbContext(typeof(McbaContext))]
-    [Migration("20230131105100_Init")]
-    partial class Init
+    [Migration("20230201065521_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
