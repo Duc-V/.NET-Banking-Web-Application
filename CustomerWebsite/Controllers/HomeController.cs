@@ -24,8 +24,17 @@ public class HomeController : Controller
         _simpleHash = simpleHash;
     }
 
+
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Remove("CustomerID");
+        return RedirectToAction("Login");
+    }
+
+
     // GET request
     public IActionResult Login() => View();
+
 
     [HttpPost]
     public async Task<IActionResult> Login(string loginID, string password)
