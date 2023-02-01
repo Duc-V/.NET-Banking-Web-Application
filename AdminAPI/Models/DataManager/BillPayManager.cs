@@ -4,11 +4,11 @@ using AdminAPI.Models.Repository;
 
 namespace AdminAPI.Models.DataManager;
 
-public class BillManager
+public class BillPayManager : IBillRepository
 {
     private readonly McbaContext _context;
 
-    public BillManager(McbaContext context)
+    public BillPayManager(McbaContext context)
     {
         _context = context;
     }
@@ -26,23 +26,6 @@ public class BillManager
         return _context.BillPay.Where(b => b.Account.AccountNumber == accountNumber).ToList();
     }
 
-
-
-    public Customer Get(int id)
-    {
-        var customer = _context.Customers
-            .Where(c => c.CustomerID == id)
-            .FirstOrDefault();
-
-        return customer;
-    }
-    public int Update(int id, Customer customer)
-    {
-        _context.Update(customer);
-        _context.SaveChanges();
-
-        return id;
-    }
 
     public void Block(int id)
     {

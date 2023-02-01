@@ -9,15 +9,15 @@ namespace AdminAPI.Controllers;
 [Route("api/[controller]")]
 public class BillPayController : ControllerBase
 {
-    private readonly BillManager _repo;
+    private readonly BillPayManager _repo;
 
-    public BillPayController(BillManager repo)
+    public BillPayController(BillPayManager repo)
     {
         _repo = repo;
     }
 
     // GET: api/BillPay ---> get all accounts and display for customer id
-    [HttpGet]
+    [HttpGet("{id}")]
     public IEnumerable<Account> Get(int id)
     {
         return _repo.GetAccounts(id);
