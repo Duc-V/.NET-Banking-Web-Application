@@ -34,6 +34,8 @@ public class Customer
     public bool IsLocked { get; set; }
 
 
+  
+
 
 }
 
