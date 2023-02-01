@@ -17,6 +17,7 @@ ViewData["Title"] = "Customers";
             <th>Mobile</th>
             <th>Status</th>
             <th>Action</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +43,11 @@ ViewData["Title"] = "Customers";
                     }
                     <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
                 </td>
+                <td>
+
+                    <a class="btn btn-primary" asp-controller="Customer" asp-action="Menu" asp-route-id="@customer.CustomerID">Select</a>
+                </td>
+
             </tr>
         }
     </tbody>
