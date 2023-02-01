@@ -8,7 +8,7 @@ ViewData["Title"] = "Customers";
 <table class="table">
     <thead>
         <tr>
-            <th>CustomerID</th>
+            <th>ID</th>
             <th>Name</th>
             <th>TFN</th>
             <th>Address</th>
@@ -17,7 +17,7 @@ ViewData["Title"] = "Customers";
             <th>PostCode</th>
             <th>Mobile</th>
             <th>Status</th>
-            <th>Lock/Unlock</th>
+            <th>Access</th>
             <th>Profile</th>
             <th>BillPay</th>
         </tr>
@@ -28,12 +28,12 @@ ViewData["Title"] = "Customers";
             <tr>
                 <td>@customer.CustomerID</td>
                 <td>@customer.Name</td>
-                <td>@customer.TFN</td>
-                <td>@customer.Address</td>
-                <td>@customer.City</td>
-                <td>@customer.State</td>
-                <td>@customer.PostCode</td>
-                <td>@customer.Mobile</td>
+                <td>@(customer.TFN ?? "N/A")</td>
+                <td>@(customer.Address ?? "N/A")</td>
+                <td>@(customer.City ?? "N/A")</td>
+                <td>@(customer.State ?? "N/A")</td>
+                <td>@(customer.PostCode ?? "N/A")</td>
+                <td>@(customer.Mobile ?? "N/A")</td>
                 <td>@(customer.IsLocked ? "Locked" : "Unlocked")</td>
                 <td>
                     @if (customer.IsLocked)
