@@ -26,7 +26,19 @@ namespace AdminWebsite.Controllers
         }
 
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var response = await Client.GetAsync($"api/billpay/{id}/transactions");
 
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            var billpayments = JsonConvert.DeserializeObject<List<BillPay>>(result);
+
+            return View(billpayments);
+        }
 
 
 
