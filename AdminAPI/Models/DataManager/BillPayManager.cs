@@ -42,7 +42,7 @@ public class BillPayManager : IBillRepository
         var billPay = _context.BillPay.Find(id);
         if (billPay != null)
         {
-            billPay.Status = billPay.Status == "" ? billPay.Status : "";
+            billPay.Status = billPay.Status == null ? billPay.Status : null;
             _context.SaveChanges();
         }
     }
