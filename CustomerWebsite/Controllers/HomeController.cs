@@ -25,12 +25,6 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Logout()
-    {
-        HttpContext.Session.Remove("CustomerID");
-        return RedirectToAction("Login");
-    }
-
 
     // GET request
     public IActionResult Login() => View();
