@@ -16,8 +16,9 @@ ViewData["Title"] = "Customers";
             <th>PostCode</th>
             <th>Mobile</th>
             <th>Status</th>
-            <th>Action</th>
-            <th></th>
+            <th>Lock/Unlock</th>
+            <th>Profile</th>
+            <th>BillPay</th>
         </tr>
     </thead>
     <tbody>
@@ -41,12 +42,13 @@ ViewData["Title"] = "Customers";
                     {
                         <a asp-action="Lock" asp-route-id="@customer.CustomerID">Lock</a>
                     }
-                    <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
                 </td>
                 <td>
-
-                    <a class="btn btn-primary" asp-controller="Customer" asp-action="Menu" asp-route-id="@customer.CustomerID">Select</a>
+                    <a asp-action="Edit" asp-route-id="@customer.CustomerID">Edit</a>
                 </td>
+                    <td>
+                    <a class="btn btn-primary" asp-controller="BillPay" asp-action="Index" asp-route-id="@customer.CustomerID">Select</a>
+                    </td>
 
             </tr>
         }

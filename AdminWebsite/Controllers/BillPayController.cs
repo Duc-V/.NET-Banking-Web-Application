@@ -11,10 +11,10 @@ namespace AdminWebsite.Controllers
 
         public BillPayController(IHttpClientFactory clientFactory) => _clientFactory = clientFactory;
 
-        public async Task<IActionResult> Index(int id)
-        {
+        //public async Task<IActionResult> Index(int id)
+        //{
             
-        }
+        //}
 
 
 
