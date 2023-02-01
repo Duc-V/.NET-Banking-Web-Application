@@ -21,7 +21,7 @@
                 <td>@billPay.BillPayID</td>
                 <td>@billPay.AccountNumber</td>
                 <td>@billPay.PayeeID</td>
-                <td>@billPay.Amount</td>
+                <td>@string.Format("${0:0.00}", billPay.Amount)</td>
                 <td>@billPay.ScheduleTimeUtc</td>
                 <td>@billPay.Period</td>
                 <td>
@@ -41,3 +41,14 @@
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-controller="Customers" asp-action="Index">Back to Customer List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
